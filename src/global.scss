@@ -1,0 +1,32 @@
+// http://ionicframework.com/docs/theming/
+@import '~@ionic/angular/css/core.css';
+@import '~@ionic/angular/css/normalize.css';
+@import '~@ionic/angular/css/structure.css';
+@import '~@ionic/angular/css/typography.css';
+
+@import '~@ionic/angular/css/padding.css';
+@import '~@ionic/angular/css/float-elements.css';
+@import '~@ionic/angular/css/text-alignment.css';
+@import '~@ionic/angular/css/text-transformation.css';
+@import '~@ionic/angular/css/flex-utils.css';
+
+// angular theme
+@import "~@angular/material/prebuilt-themes/indigo-pink.css";
+
+// base
+@import "./src/assets/styles/base.scss";
+
+* {
+  font-size: 1rem;
+  line-height: 1.625rem;
+}
+
+body {
+  @include size(100%, 100vh);
+  @include font('small', 400, 'Roboto');
+  text-rendering: optimizeLegibility;
+
+  strong {
+    font-weight: 700;
+  }
+}
