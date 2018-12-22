@@ -1,9 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import {ChangeDetectionStrategy, Component, OnInit} from '@angular/core';
 
 @Component({
-  selector: 'app-my-cars',
   templateUrl: './my-cars.page.html',
   styleUrls: ['./my-cars.page.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class MyCarsPage implements OnInit {
 

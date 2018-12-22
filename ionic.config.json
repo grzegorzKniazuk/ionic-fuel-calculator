@@ -1,6 +1,8 @@
 {
   "name": "ionic-fuel-calculator",
-  "integrations": {},
+  "integrations": {
+    "cordova": {}
+  },
   "type": "angular",
   "id": "2fa29679"
 }

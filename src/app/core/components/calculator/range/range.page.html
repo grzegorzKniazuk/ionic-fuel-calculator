@@ -1,0 +1,49 @@
+<form autocomplete="off" [formGroup]="rangeSimulationForm">
+    <div class="form-input">
+        <mat-form-field [hideRequiredMarker]="false">
+            <input formControlName="averageFuelConsumption"
+                   matInput
+                   type="text"
+                   required
+                   placeholder="Average fuel consumption">
+            <mat-error *ngIf="rangeSimulationForm.get('averageFuelConsumption').hasError('required')">This field is required</mat-error>
+            <mat-error *ngIf="rangeSimulationForm.get('averageFuelConsumption').hasError('min')
+                   && !rangeSimulationForm.get('averageFuelConsumption').hasError('required')">The minimum value is 1</mat-error>
+            <mat-error *ngIf="rangeSimulationForm.get('averageFuelConsumption').hasError('numbersOnly')
+                   && !rangeSimulationForm.get('averageFuelConsumption').hasError('min')
+                   && !rangeSimulationForm.get('averageFuelConsumption').hasError('required')">Only numbers are allowed</mat-error>
+        </mat-form-field>
+        <mat-form-field [hideRequiredMarker]="false">
+            <input formControlName="fuelCost"
+                   matInput
+                   type="text"
+                   required
+                   placeholder="Fuel cost">
+            <mat-error *ngIf="rangeSimulationForm.get('fuelCost').hasError('required')">This field is required</mat-error>
+            <mat-error *ngIf="rangeSimulationForm.get('fuelCost').hasError('min')
+                   && !rangeSimulationForm.get('fuelCost').hasError('required')">The minimum value is 1</mat-error>
+            <mat-error *ngIf="rangeSimulationForm.get('fuelCost').hasError('numbersOnly')
+                   && !rangeSimulationForm.get('fuelCost').hasError('min')
+                   && !rangeSimulationForm.get('fuelCost').hasError('required')">Only numbers are allowed</mat-error>
+        </mat-form-field>
+        <mat-form-field [hideRequiredMarker]="false">
+            <input formControlName="costPerUnit"
+                   matInput
+                   type="text"
+                   required
+                   placeholder="Cost fuel per unit">
+            <mat-error *ngIf="rangeSimulationForm.get('costPerUnit').hasError('required')">This field is required</mat-error>
+            <mat-error *ngIf="rangeSimulationForm.get('costPerUnit').hasError('min')
+                   && !rangeSimulationForm.get('costPerUnit').hasError('required')">The minimum value is 1</mat-error>
+            <mat-error *ngIf="rangeSimulationForm.get('costPerUnit').hasError('numbersOnly')
+                   && !rangeSimulationForm.get('costPerUnit').hasError('min')
+                   && !rangeSimulationForm.get('costPerUnit').hasError('required')">Only numbers are allowed</mat-error>
+        </mat-form-field>
+    </div>
+    <div class="form-output">
+        <p *ngIf="amountOfFuel">The amount of fuel is</p>
+        <output *ngIf="amountOfFuel">{{ amountOfFuel.toFixed(2) }} <span>{{ applicationSettings.fuelUnits }}</span></output>
+        <p *ngIf="range">The predicted range is</p>
+        <output *ngIf="range">{{ range.toFixed(2) }} <span>{{ applicationSettings.distanceUnits }}</span></output>
+    </div>
+</form>

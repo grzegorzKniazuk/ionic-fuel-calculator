@@ -4,7 +4,22 @@
     <ion-title slot="start">Settings</ion-title>
   </ion-toolbar>
 </ion-header>
-
-<ion-content padding>
-
+<ion-content padding [formGroup]="settingsForm">
+  <strong>Distance units</strong>
+  <mat-radio-group label="after" formControlName="distanceUnits">
+    <mat-radio-button name="distanceUnits" value="mile">mile</mat-radio-button>
+    <mat-radio-button name="distanceUnits" value="km">km</mat-radio-button>
+  </mat-radio-group>
+  <strong>Fuel units</strong>
+  <mat-radio-group label="after" formControlName="fuelUnits">
+    <mat-radio-button name="fuelUnits" value="gallons">gallons</mat-radio-button>
+    <mat-radio-button name="fuelUnits" value="liters">liters</mat-radio-button>
+  </mat-radio-group>
+  <strong>Money units</strong>
+  <mat-radio-group label="after" formControlName="moneyUnits">
+    <mat-radio-button name="moneyUnits" value="euro">euro</mat-radio-button>
+    <mat-radio-button name="moneyUnits" value="dollar">dollar</mat-radio-button>
+    <mat-radio-button name="moneyUnits" value="pln">pln</mat-radio-button>
+    <mat-radio-button name="moneyUnits" value="pound">pound</mat-radio-button>
+  </mat-radio-group>
 </ion-content>

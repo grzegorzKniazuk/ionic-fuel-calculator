@@ -6,5 +6,30 @@
 </ion-header>
 
 <ion-content padding>
-
+  <mat-tab-group mat-align-tabs="center">
+    <mat-tab>
+      <ng-template mat-tab-label>
+        <mat-icon>local_gas_station</mat-icon>Fuel
+      </ng-template>
+      <ng-template matTabContent>
+        <app-fuel></app-fuel>
+      </ng-template>
+    </mat-tab>
+    <mat-tab>
+      <ng-template mat-tab-label>
+        <mat-icon>attach_money</mat-icon>Cost
+      </ng-template>
+      <ng-template matTabContent>
+        <app-cost></app-cost>
+      </ng-template>
+    </mat-tab>
+    <mat-tab>
+      <ng-template mat-tab-label>
+        <mat-icon>gps_fixed</mat-icon>Range
+      </ng-template>
+      <ng-template matTabContent>
+        <app-range></app-range>
+      </ng-template>
+    </mat-tab>
+  </mat-tab-group>
 </ion-content>

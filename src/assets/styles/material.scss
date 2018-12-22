@@ -1,0 +1,28 @@
+.toast-success {
+  background: $leaf;
+  color: $white;
+}
+
+.toast-error {
+  background: $danger;
+  color: $white;
+}
+
+.mat-snack-bar-handset {
+  margin-bottom: 60px !important;
+}
+
+mat-tab-header {
+  position: absolute;
+  left: -15px;
+  top: -10px;
+  width: 110%;
+}
+mat-form-field {
+  margin-bottom: 10px;
+}
+
+mat-error {
+  @include font('ultra-small');
+  margin-top: -8px;
+}

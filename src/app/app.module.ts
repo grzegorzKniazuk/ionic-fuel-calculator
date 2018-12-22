@@ -1,4 +1,4 @@
-import {CUSTOM_ELEMENTS_SCHEMA, NgModule} from '@angular/core';
+import {CUSTOM_ELEMENTS_SCHEMA, ErrorHandler, NgModule} from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { RouteReuseStrategy } from '@angular/router';
 
@@ -10,6 +10,8 @@ import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {MaterialModule} from "./material.module";
+import {FormsModule, ReactiveFormsModule} from "@angular/forms";
+import {IonicStorageModule} from "@ionic/storage";
 
 @NgModule({
   declarations: [
@@ -17,16 +19,19 @@ import {MaterialModule} from "./material.module";
   ],
   entryComponents: [],
   imports: [
-      BrowserModule,
-      IonicModule.forRoot(),
-      AppRoutingModule,
-      MaterialModule,
-      BrowserAnimationsModule,
+        BrowserModule,
+        FormsModule,
+        ReactiveFormsModule,
+        IonicModule.forRoot(),
+        IonicStorageModule.forRoot(),
+        AppRoutingModule,
+        MaterialModule,
+        BrowserAnimationsModule,
   ],
   providers: [
-    StatusBar,
-    SplashScreen,
-    { provide: RouteReuseStrategy, useClass: IonicRouteStrategy }
+        StatusBar,
+        SplashScreen,
+        { provide: RouteReuseStrategy, useClass: IonicRouteStrategy }
   ],
     schemas: [
         CUSTOM_ELEMENTS_SCHEMA,
