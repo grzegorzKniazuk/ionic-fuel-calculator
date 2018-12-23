@@ -5,15 +5,10 @@
   </ion-toolbar>
 </ion-header>
 <ion-content padding [formGroup]="settingsForm">
-  <strong>Distance units</strong>
-  <mat-radio-group label="after" formControlName="distanceUnits">
-    <mat-radio-button name="distanceUnits" value="mile">mile</mat-radio-button>
-    <mat-radio-button name="distanceUnits" value="km">km</mat-radio-button>
-  </mat-radio-group>
-  <strong>Fuel units</strong>
-  <mat-radio-group label="after" formControlName="fuelUnits">
-    <mat-radio-button name="fuelUnits" value="gallons">gallons</mat-radio-button>
-    <mat-radio-button name="fuelUnits" value="liters">liters</mat-radio-button>
+  <strong>Metric units</strong>
+  <mat-radio-group label="after" formControlName="metricUnits">
+    <mat-radio-button name="metricUnits" value="US">Miles and gallons</mat-radio-button>
+    <mat-radio-button name="metricUnits" value="PL">Kilometers and litres</mat-radio-button>
   </mat-radio-group>
   <strong>Money units</strong>
   <mat-radio-group label="after" formControlName="moneyUnits">

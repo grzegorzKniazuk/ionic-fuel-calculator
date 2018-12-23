@@ -1,13 +1,10 @@
 import {ChangeDetectionStrategy, Component, OnDestroy, OnInit} from '@angular/core';
-import { FormService } from "../../services/form.service";
-import { FormGroup } from "@angular/forms";
-import { SettingsData } from "../../interfaces/settings-data";
-import {ToastService} from "../../services/toast.service";
-import {ToastMessages} from "../../enums/toast-messages.enum";
-import { Storage } from '@ionic/storage';
+import {FormService} from "../../services/form.service";
+import {FormGroup} from "@angular/forms";
+import {SettingsData} from "../../interfaces/settings-data";
 import {AutoUnsubscribe} from "ngx-auto-unsubscribe";
-import {DistanceUnits} from "../../enums/distance-units.enum";
-import {FuelUnits} from "../../enums/fuel-units.enum";
+import {StorageService} from "../../services/storage.service";
+import {take} from "rxjs/operators";
 
 @AutoUnsubscribe()
 @Component({
@@ -17,29 +14,31 @@ import {FuelUnits} from "../../enums/fuel-units.enum";
 })
 export class SettingsPage implements OnInit, OnDestroy {
 
+  private applicationSettings: SettingsData;
   public settingsForm: FormGroup;
-  private applicationSettingsData: SettingsData;
 
-  constructor(private formService: FormService, private toastService: ToastService, private storage: Storage) { }
+  constructor(private formService: FormService,
+              private storageService: StorageService) { }
 
   ngOnInit() {
     this.buildForm();
-    this.loadSettings();
+    this.watchSettings();
     this.watchForm();
   }
 
   ngOnDestroy(): void {
   }
 
-  private loadSettings(): void {
-    if (this.storage.get('settings')) {
-      this.storage.get('settings').then((data) => {
-        this.applicationSettingsData = data;
-        this.settingsForm.setValue(this.applicationSettingsData);
-      }).catch((error) => {
-        this.toastService.error(error);
-      });
-    }
+  private watchSettings(): void {
+    this.storageService.applicationSettings$
+        .pipe(take(1))
+        .subscribe((data: SettingsData) => {
+          this.applicationSettings = data;
+          this.settingsForm.setValue({
+            metricUnits: data.metricUnits,
+            moneyUnits: data.moneyUnits,
+          });
+    });
   }
 
   private buildForm(): void {
@@ -47,21 +46,8 @@ export class SettingsPage implements OnInit, OnDestroy {
   }
 
   private watchForm(): void {
-    this.settingsForm.valueChanges
-        .subscribe((formStateData: SettingsData) => {
-          this.storage.set('settings', formStateData).then(() => {
-            this.toastService.success(ToastMessages.settingsSaved);
-          }).catch((error) => {
-            this.toastService.error(error);
-          });
+    this.settingsForm.valueChanges.subscribe((formStateData: SettingsData) => {
+        this.storageService.setApplicationSettings(formStateData);
     });
-  }
-
-  public setFuelUnits(): void {
-
-  }
-
-  public setDistanceUnits(): void {
-
   }
 }

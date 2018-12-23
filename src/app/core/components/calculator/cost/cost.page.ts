@@ -1,11 +1,9 @@
-import { ChangeDetectionStrategy, ChangeDetectorRef, Component, OnDestroy, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component, OnDestroy, OnInit } from '@angular/core';
 import { FormService } from "../../../services/form.service";
 import { FormGroup } from "@angular/forms";
-import { Storage } from '@ionic/storage';
 import { AutoUnsubscribe } from "ngx-auto-unsubscribe";
-import { ToastService } from "../../../services/toast.service";
-import {CostSimulationData} from "../../../interfaces/cost-simulation-data";
-import {CalculatorPage} from "../../../models/calculator-page.model";
+import { CostSimulationData } from "../../../interfaces/cost-simulation-data";
+import { StorageService } from "../../../services/storage.service";
 
 @AutoUnsubscribe()
 @Component({
@@ -14,21 +12,17 @@ import {CalculatorPage} from "../../../models/calculator-page.model";
   styleUrls: ['./cost.page.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class CostPage extends CalculatorPage implements OnInit, OnDestroy {
+export class CostPage implements OnInit, OnDestroy {
 
   public costSimulationForm: FormGroup;
   public fuelConsumption: number;
   public fuelCost: number;
 
   constructor(private formService: FormService,
-              private changeDetectorRef: ChangeDetectorRef,
-              protected storage: Storage,
-              protected toastService: ToastService) {
-    super(storage, toastService);
+              public storageService: StorageService) {
   }
 
   ngOnInit() {
-    super.loadApplicationSettings();
     this.buildForm();
     this.watchForm();
   }
@@ -49,7 +43,6 @@ export class CostPage extends CalculatorPage implements OnInit, OnDestroy {
         this.fuelConsumption = 0;
         this.fuelCost = 0;
       }
-      this.changeDetectorRef.detectChanges();
     });
   }
 }

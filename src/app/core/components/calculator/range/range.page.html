@@ -9,7 +9,7 @@
             <mat-error *ngIf="rangeSimulationForm.get('averageFuelConsumption').hasError('required')">This field is required</mat-error>
             <mat-error *ngIf="rangeSimulationForm.get('averageFuelConsumption').hasError('min')
                    && !rangeSimulationForm.get('averageFuelConsumption').hasError('required')">The minimum value is 1</mat-error>
-            <mat-error *ngIf="rangeSimulationForm.get('averageFuelConsumption').hasError('numbersOnly')
+            <mat-error *ngIf="rangeSimulationForm.get('averageFuelConsumption').hasError('floatNumbersOnly')
                    && !rangeSimulationForm.get('averageFuelConsumption').hasError('min')
                    && !rangeSimulationForm.get('averageFuelConsumption').hasError('required')">Only numbers are allowed</mat-error>
         </mat-form-field>
@@ -22,7 +22,7 @@
             <mat-error *ngIf="rangeSimulationForm.get('fuelCost').hasError('required')">This field is required</mat-error>
             <mat-error *ngIf="rangeSimulationForm.get('fuelCost').hasError('min')
                    && !rangeSimulationForm.get('fuelCost').hasError('required')">The minimum value is 1</mat-error>
-            <mat-error *ngIf="rangeSimulationForm.get('fuelCost').hasError('numbersOnly')
+            <mat-error *ngIf="rangeSimulationForm.get('fuelCost').hasError('floatNumbersOnly')
                    && !rangeSimulationForm.get('fuelCost').hasError('min')
                    && !rangeSimulationForm.get('fuelCost').hasError('required')">Only numbers are allowed</mat-error>
         </mat-form-field>
@@ -35,15 +35,15 @@
             <mat-error *ngIf="rangeSimulationForm.get('costPerUnit').hasError('required')">This field is required</mat-error>
             <mat-error *ngIf="rangeSimulationForm.get('costPerUnit').hasError('min')
                    && !rangeSimulationForm.get('costPerUnit').hasError('required')">The minimum value is 1</mat-error>
-            <mat-error *ngIf="rangeSimulationForm.get('costPerUnit').hasError('numbersOnly')
+            <mat-error *ngIf="rangeSimulationForm.get('costPerUnit').hasError('floatNumbersOnly')
                    && !rangeSimulationForm.get('costPerUnit').hasError('min')
                    && !rangeSimulationForm.get('costPerUnit').hasError('required')">Only numbers are allowed</mat-error>
         </mat-form-field>
     </div>
     <div class="form-output">
         <p *ngIf="amountOfFuel">The amount of fuel is</p>
-        <output *ngIf="amountOfFuel">{{ amountOfFuel.toFixed(2) }} <span>{{ applicationSettings.fuelUnits }}</span></output>
+        <output *ngIf="amountOfFuel">{{ amountOfFuel.toFixed(2) }} <span>{{ (storageService.applicationSettings$ | async)?.metricUnits === 'PL' ? 'liters' : 'gallons' }}</span></output>
         <p *ngIf="range">The predicted range is</p>
-        <output *ngIf="range">{{ range.toFixed(2) }} <span>{{ applicationSettings.distanceUnits }}</span></output>
+        <output *ngIf="range">{{ range.toFixed(2) }} <span>{{ (storageService.applicationSettings$ | async)?.metricUnits === 'PL' ? 'km' : 'miles' }}</span></output>
     </div>
 </form>

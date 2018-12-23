@@ -8,8 +8,21 @@
   color: $white;
 }
 
+mat-dialog-content {
+  margin-top: -30px;
+}
+
+.mat-dialog-container {
+  overflow: visible !important;
+  padding-top: 0 !important;
+}
+
 .mat-snack-bar-handset {
   margin-bottom: 60px !important;
+}
+
+button:disabled {
+  cursor: not-allowed;
 }
 
 mat-tab-header {
@@ -18,11 +31,16 @@ mat-tab-header {
   top: -10px;
   width: 110%;
 }
-mat-form-field {
-  margin-bottom: 10px;
-}
 
 mat-error {
   @include font('ultra-small');
   margin-top: -8px;
 }
+
+mat-hint {
+  @include font('ultra-small');
+  margin-top: -8px;
+  margin-bottom: 18px;
+  user-select: none;
+}
+

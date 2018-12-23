@@ -3,12 +3,10 @@ import {FormService} from "../../../services/form.service";
 import {FormGroup} from "@angular/forms";
 import {FuelSimulationData} from "../../../interfaces/fuel-simulation-data";
 import {filter, tap} from "rxjs/operators";
-import {ToastService} from "../../../services/toast.service";
-import {DistanceUnits} from "../../../enums/distance-units.enum";
-import {FuelUnits} from "../../../enums/fuel-units.enum";
 import {AutoUnsubscribe} from "ngx-auto-unsubscribe";
-import {CalculatorPage} from "../../../models/calculator-page.model";
-import {Storage} from "@ionic/storage";
+import {StorageService} from "../../../services/storage.service";
+import {SettingsData} from "../../../interfaces/settings-data";
+import {MetricUnits} from "../../../enums/metric-units.enum";
 
 @AutoUnsubscribe()
 @Component({
@@ -17,23 +15,21 @@ import {Storage} from "@ionic/storage";
   styleUrls: ['./fuel.page.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class FuelPage extends CalculatorPage implements OnInit, OnDestroy {
+export class FuelPage implements OnInit, OnDestroy {
 
+  public applicationSettings: SettingsData;
   public fuelConsumption: number;
   public travelCost: number;
   public fuelSimulationForm: FormGroup;
 
   constructor(private formService: FormService,
-              private changeDetectorRef: ChangeDetectorRef,
-              protected storage: Storage,
-              protected toastService: ToastService) {
-      super(storage, toastService);
+              public storageService: StorageService) {
   }
 
   ngOnInit(): void {
-    super.loadApplicationSettings();
     this.buildForm();
     this.watchForm();
+    this.watchSettings();
   }
 
   ngOnDestroy(): void {
@@ -43,6 +39,15 @@ export class FuelPage extends CalculatorPage implements OnInit, OnDestroy {
     this.fuelSimulationForm = this.formService.fuelSimulationForm;
   }
 
+  private watchSettings(): void {
+    this.storageService.applicationSettings$
+        .pipe(filter((data: SettingsData) => data !== null ))
+        .subscribe((data: SettingsData) => {
+          this.applicationSettings = data;
+          this.calculateFuelConsumption(this.fuelSimulationForm.value);
+    });
+  }
+
   private watchForm(): void {
     this.fuelSimulationForm.valueChanges
         .pipe(tap(() => {
@@ -50,23 +55,27 @@ export class FuelPage extends CalculatorPage implements OnInit, OnDestroy {
             this.travelCost = 0;
           }
         }))
-        .pipe(filter(() => {
-          return this.fuelSimulationForm.get('refiledLiters').valid && this.fuelSimulationForm.get('traveledDistance').valid;
+        .pipe(filter((formData: FuelSimulationData) => {
+          return this.fuelSimulationForm.get('refiledLiters').valid
+              && this.fuelSimulationForm.get('traveledDistance').valid
+              && formData.refiledLiters !== ''
+              && formData.traveledDistance !== '';
         }))
         .subscribe((formData: FuelSimulationData) => {
-      if (formData.refiledLiters !== '' && formData.traveledDistance !== '') {
-        if (this.applicationSettings.distanceUnits === DistanceUnits.km && this.applicationSettings.fuelUnits === FuelUnits.liters) {
-          this.fuelConsumption = parseFloat(formData.refiledLiters) / parseFloat(formData.traveledDistance) * 100;
-          if (this.fuelSimulationForm.get('costPerUnit').valid && formData.costPerUnit !== '') {
-            this.travelCost = ((parseFloat(this.fuelSimulationForm.get('costPerUnit').value) * this.fuelConsumption) * 100 + Number.EPSILON) / 100;
-          }
-        } else if (this.applicationSettings.distanceUnits === DistanceUnits.mile && this.applicationSettings.fuelUnits === FuelUnits.gallons) {
-          this.fuelConsumption = parseFloat(formData.traveledDistance) / parseFloat(formData.refiledLiters);
-        } else {
+          this.calculateFuelConsumption(formData);
+        });
+  }
 
+  private calculateFuelConsumption(formData: FuelSimulationData): void {
+    if (formData.refiledLiters !== '' && formData.traveledDistance !== '') {
+      if (this.applicationSettings.metricUnits === MetricUnits.PL) {
+        this.fuelConsumption =  parseFloat(formData.refiledLiters) / parseFloat(formData.traveledDistance) * 100;
+        if (this.fuelSimulationForm.get('costPerUnit').valid && formData.costPerUnit !== '') {
+          this.travelCost = ((parseFloat(this.fuelSimulationForm.get('costPerUnit').value) * this.fuelConsumption) * 100 + Number.EPSILON) / 100;
         }
-        this.changeDetectorRef.detectChanges();
+      } else if (this.applicationSettings.metricUnits === MetricUnits.US) {
+        this.fuelConsumption = parseFloat(formData.traveledDistance) / parseFloat(formData.refiledLiters);
       }
-    });
+    }
   }
 }

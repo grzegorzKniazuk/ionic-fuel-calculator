@@ -1,27 +1,46 @@
 <form autocomplete="off" [formGroup]="fuelSimulationForm">
     <div class="form-input">
         <mat-form-field [hideRequiredMarker]="false">
-            <input formControlName="refiledLiters" matInput type="text" required placeholder="The number of refilled liters">
+            <input formControlName="refiledLiters"
+                   matInput
+                   type="text"
+                   required
+                   [placeholder]="(storageService.applicationSettings$ | async)?.metricUnits === 'PL' ? 'The number of refilled liters' : 'The number of refilled gallons'">
             <mat-error *ngIf="fuelSimulationForm.get('refiledLiters').hasError('required')">This field is required</mat-error>
-            <mat-error *ngIf="fuelSimulationForm.get('refiledLiters').hasError('min') && !fuelSimulationForm.get('refiledLiters').hasError('required')">The minimum value is 1</mat-error>
-            <mat-error *ngIf="fuelSimulationForm.get('refiledLiters').hasError('numbersOnly') && !fuelSimulationForm.get('refiledLiters').hasError('min') && !fuelSimulationForm.get('refiledLiters').hasError('required')">Only numbers are allowed</mat-error>
+            <mat-error
+                *ngIf="fuelSimulationForm.get('refiledLiters').hasError('min')
+                && !fuelSimulationForm.get('refiledLiters').hasError('required')">The minimum value is 1</mat-error>
+            <mat-error
+                *ngIf="fuelSimulationForm.get('refiledLiters').hasError('floatNumbersOnly')
+                && !fuelSimulationForm.get('refiledLiters').hasError('min')
+                && !fuelSimulationForm.get('refiledLiters').hasError('required')">Only numbers are allowed</mat-error>
         </mat-form-field>
         <mat-form-field [hideRequiredMarker]="false">
-            <input formControlName="traveledDistance" matInput type="text" required placeholder="The number of km/miles traveled">
+            <input formControlName="traveledDistance"
+                   matInput
+                   type="text"
+                   required
+                   [placeholder]="(storageService.applicationSettings$ | async)?.metricUnits === 'PL' ? 'The number of km traveled' : 'The number of miles traveled'">
             <mat-error *ngIf="fuelSimulationForm.get('traveledDistance').hasError('required')">This field is required</mat-error>
-            <mat-error *ngIf="fuelSimulationForm.get('traveledDistance').hasError('min') && !fuelSimulationForm.get('traveledDistance').hasError('required')">The minimum value is 1</mat-error>
-            <mat-error *ngIf="fuelSimulationForm.get('traveledDistance').hasError('numbersOnly') && !fuelSimulationForm.get('traveledDistance').hasError('min') && !fuelSimulationForm.get('traveledDistance').hasError('required')">Only numbers are allowed</mat-error>
+            <mat-error
+                *ngIf="fuelSimulationForm.get('traveledDistance').hasError('min')
+                && !fuelSimulationForm.get('traveledDistance').hasError('required')">The minimum value is 1</mat-error>
+            <mat-error
+                *ngIf="fuelSimulationForm.get('traveledDistance').hasError('floatNumbersOnly')
+                && !fuelSimulationForm.get('traveledDistance').hasError('min')
+                && !fuelSimulationForm.get('traveledDistance').hasError('required')">Only numbers are allowed</mat-error>
         </mat-form-field>
         <mat-form-field>
             <input formControlName="costPerUnit" matInput type="text" placeholder="Price per unit">
-            <mat-error *ngIf="fuelSimulationForm.get('costPerUnit').value !== '' && fuelSimulationForm.get('costPerUnit').hasError('min')">The minimum value is 1</mat-error>
-            <mat-error *ngIf="fuelSimulationForm.get('costPerUnit').value !== '' && fuelSimulationForm.get('costPerUnit').hasError('numbersOnly') && !fuelSimulationForm.get('costPerUnit').hasError('min')">Only numbers are allowed</mat-error>
+            <mat-error *ngIf="fuelSimulationForm.get('costPerUnit').hasError('min')">The minimum value is 1</mat-error>
+            <mat-error *ngIf=" fuelSimulationForm.get('costPerUnit').hasError('floatNumbersOnly')
+                                && !fuelSimulationForm.get('costPerUnit').hasError('min')">Only numbers are allowed</mat-error>
         </mat-form-field>
     </div>
     <div class="form-output">
-        <p *ngIf="fuelConsumption">Average fuel consumption per 100 {{ applicationSettings.distanceUnits }}</p>
-        <output *ngIf="fuelConsumption">{{ fuelConsumption.toFixed(2) }} <span>{{ applicationSettings.fuelUnits }}</span></output>
-        <p *ngIf="travelCost">The cost of traveling 100 {{ applicationSettings.distanceUnits }}</p>
-        <output *ngIf="travelCost">{{ travelCost.toFixed(2) }} <span>{{ applicationSettings.moneyUnits }}</span></output>
+        <p *ngIf="fuelConsumption">Average fuel consumption per 100 {{ (storageService.applicationSettings$ | async)?.metricUnits === 'PL' ? 'km' : 'miles' }}</p>
+        <output *ngIf="fuelConsumption">{{ fuelConsumption.toFixed(2) }} <span>{{ (storageService.applicationSettings$ | async)?.metricUnits === 'PL' ? 'liters' : 'gallons' }}</span></output>
+        <p *ngIf="travelCost">The cost of traveling 100 {{ (storageService.applicationSettings$ | async)?.metricUnits === 'PL' ? 'km' : 'miles' }}</p>
+        <output *ngIf="travelCost">{{ travelCost.toFixed(2) }} <span>{{ (storageService.applicationSettings$ | async)?.moneyUnits }}</span></output>
     </div>
 </form>

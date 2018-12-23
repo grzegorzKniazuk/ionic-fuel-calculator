@@ -1,0 +1,19 @@
+<ion-header>
+  <ion-toolbar>
+    <mat-icon slot="start">directions_car</mat-icon>
+    <ion-title slot="start">Refueling history</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content padding>
+  <div class="no-refueling-data" *ngIf="!refuelingHistoryData.length">
+    <mat-icon>error_outline</mat-icon>
+    <h4>There is no refueling history</h4>
+    <h6>Click to + to add a new entry</h6>
+  </div>
+  <button class="new-history-entry-button"
+          (click)="openNewEntryModal()"
+          mat-fab color="primary">
+    <mat-icon>add</mat-icon>
+  </button>
+</ion-content>

@@ -1,9 +1,10 @@
 import { NgModule } from '@angular/core';
 import {
+    MAT_DIALOG_DEFAULT_OPTIONS,
     MAT_SNACK_BAR_DEFAULT_OPTIONS,
-    MatButtonModule,
+    MatButtonModule, MatDatepickerModule, MatDialogConfig, MatDialogModule,
     MatIconModule,
-    MatInputModule,
+    MatInputModule, MatNativeDateModule,
     MatRadioModule,
     MatSnackBarConfig,
     MatSnackBarModule, MatTabsModule,
@@ -15,6 +16,12 @@ const MAT_SNACKBAR_GLOBAL_CONFIG: MatSnackBarConfig = {
     verticalPosition: "bottom",
 };
 
+const MAT_DIALOG_GLOBAL_CONFIG: MatDialogConfig = {
+    width: '90%',
+    disableClose: true,
+    hasBackdrop: true,
+};
+
 @NgModule({
     declarations: [],
     imports: [
@@ -24,6 +31,8 @@ const MAT_SNACKBAR_GLOBAL_CONFIG: MatSnackBarConfig = {
         MatRadioModule,
         MatSnackBarModule,
         MatTabsModule,
+        MatDialogModule,
+        MatDatepickerModule,
     ],
     exports: [
         MatIconModule,
@@ -32,8 +41,12 @@ const MAT_SNACKBAR_GLOBAL_CONFIG: MatSnackBarConfig = {
         MatRadioModule,
         MatSnackBarModule,
         MatTabsModule,
+        MatDialogModule,
+        MatDatepickerModule,
+        MatNativeDateModule,
     ],
     providers: [
+        { provide: MAT_DIALOG_DEFAULT_OPTIONS, useValue: MAT_DIALOG_GLOBAL_CONFIG },
         { provide: MAT_SNACK_BAR_DEFAULT_OPTIONS, useValue: MAT_SNACKBAR_GLOBAL_CONFIG },
     ]
 })

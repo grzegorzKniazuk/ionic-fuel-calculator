@@ -14,8 +14,8 @@ import {SharedModule} from "../../../shared/shared.module";
 
 const routes: Routes = [
   {
-    path: '',
-    component: CalculatorPage,
+      path: '',
+      component: CalculatorPage,
   }
 ];
 
@@ -27,7 +27,7 @@ const routes: Routes = [
       IonicModule,
       MaterialModule,
       SharedModule,
-      RouterModule.forChild(routes)
+      RouterModule.forChild(routes),
   ],
   declarations: [
       CalculatorPage,

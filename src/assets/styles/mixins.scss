@@ -48,3 +48,10 @@ $border-radius: 4px;
     @content
   }
 }
+
+@mixin mat-icon-size($size: 24px) {
+  font-size: $size;
+  height: $size;
+  width: $size;
+  line-height: $size;
+}

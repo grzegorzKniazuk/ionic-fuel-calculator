@@ -1,9 +1,7 @@
 import {MoneyUnits} from "../enums/money-units.enum";
-import {FuelUnits} from "../enums/fuel-units.enum";
-import {DistanceUnits} from "../enums/distance-units.enum";
+import {MetricUnits} from "../enums/metric-units.enum";
 
 export interface SettingsData {
-    distanceUnits: DistanceUnits;
-    fuelUnits: FuelUnits;
+    metricUnits: MetricUnits;
     moneyUnits: MoneyUnits;
 }

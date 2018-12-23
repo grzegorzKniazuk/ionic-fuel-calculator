@@ -1,0 +1,19 @@
+@import "./src/assets/styles/base.scss";
+
+.form-header-wrapper {
+  position: relative;
+  @include position(-40px, auto, auto, -24px);
+  width: calc(100% + 24px);
+  z-index: 1001; // required for custom material dialog header
+
+  .form-header {
+    @include flex(flex, center, center);
+    @include size(calc(100% + 24px), 50px);
+    padding-bottom: 10px;
+    color: $white;
+    text-transform: uppercase;
+    background: $material-indigo-pink-background;
+    border-top-left-radius: $border-radius;
+    border-top-right-radius: $border-radius;
+  }
+}

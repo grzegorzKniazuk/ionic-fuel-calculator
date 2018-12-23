@@ -5,24 +5,24 @@ import { Routes, RouterModule } from '@angular/router';
 
 import { IonicModule } from '@ionic/angular';
 
-import { MyCarsPage } from './my-cars.page';
+import { AboutPage } from './about.page';
 import {MaterialModule} from "../../../material.module";
 
 const routes: Routes = [
   {
     path: '',
-    component: MyCarsPage,
+    component: AboutPage,
   }
 ];
 
 @NgModule({
   imports: [
-    CommonModule,
-    FormsModule,
-    IonicModule,
-    MaterialModule,
-    RouterModule.forChild(routes)
+      CommonModule,
+      FormsModule,
+      IonicModule,
+      MaterialModule,
+      RouterModule.forChild(routes)
   ],
-  declarations: [MyCarsPage]
+  declarations: [AboutPage]
 })
-export class MyCarsPageModule {}
+export class AboutPageModule {}
