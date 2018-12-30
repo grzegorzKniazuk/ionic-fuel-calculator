@@ -5,7 +5,8 @@
       <input formControlName="date" matInput [max]="today" [matDatepicker]="picker" placeholder="Choose a date">
       <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
       <mat-datepicker touchUi #picker></mat-datepicker>
-      <mat-error *ngIf="refuelingForm.get('date').hasError('required')">This field is required</mat-error>
+      <mat-error *ngIf="refuelingForm.get('date').hasError('required') && !refuelingForm.get('date').hasError('matDatepickerParse')">This field is required</mat-error>
+      <mat-error *ngIf="refuelingForm.get('date').hasError('matDatepickerParse')">Invalid date format</mat-error>
     </mat-form-field>
     <mat-form-field [hideRequiredMarker]="false">
       <input formControlName="mileage"
@@ -20,23 +21,12 @@
                    && !refuelingForm.get('mileage').hasError('min')
                    && !refuelingForm.get('mileage').hasError('required')">Only numbers are allowed</mat-error>
     </mat-form-field>
-    <mat-form-field>
-      <input formControlName="averageFuelConsumptionByComputer"
-             matInput
-             type="text"
-             placeholder="Average fuel consumption from car computer">
-      <mat-error *ngIf="refuelingForm.get('averageFuelConsumptionByComputer').hasError('required')">This field is required</mat-error>
-      <mat-error *ngIf="refuelingForm.get('averageFuelConsumptionByComputer').hasError('min')
-                   && !refuelingForm.get('averageFuelConsumptionByComputer').hasError('required')">The minimum value is 1</mat-error>
-      <mat-error *ngIf="refuelingForm.get('averageFuelConsumptionByComputer').hasError('floatNumbersOnly')
-                   && !refuelingForm.get('averageFuelConsumptionByComputer').hasError('min')
-                   && !refuelingForm.get('averageFuelConsumptionByComputer').hasError('required')">Only numbers are allowed</mat-error>
-    </mat-form-field>
     <mat-form-field [hideRequiredMarker]="false">
       <input formControlName="amountOfFuel"
              matInput
              type="text"
              required
+             appCommaToDot
              placeholder="Amount of fuel">
       <mat-error *ngIf="refuelingForm.get('amountOfFuel').hasError('required')">This field is required</mat-error>
       <mat-error *ngIf="refuelingForm.get('amountOfFuel').hasError('min')
@@ -50,6 +40,7 @@
              matInput
              type="text"
              required
+             appCommaToDot
              [placeholder]="(storageService.applicationSettings$ | async)?.metricUnits === 'PL' ? 'Fuel cost per  liter' : 'Fuel cost per gallon'">
       <mat-error *ngIf="refuelingForm.get('fuelCostPerUnit').hasError('required')">This field is required</mat-error>
       <mat-error *ngIf="refuelingForm.get('fuelCostPerUnit').hasError('min')
@@ -63,6 +54,7 @@
              matInput
              type="text"
              required
+             appCommaToDot
              placeholder="Fuel total cost">
       <mat-error *ngIf="refuelingForm.get('fuelCost').hasError('required')">This field is required</mat-error>
       <mat-error *ngIf="refuelingForm.get('fuelCost').hasError('min')

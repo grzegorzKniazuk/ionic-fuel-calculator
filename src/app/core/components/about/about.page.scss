@@ -4,7 +4,55 @@
   @include flex(flex, flex-start, center, column);
   @include size(100%, 100%);
 
-  p:last-of-type {
-    @include font('ultra-small');
+  @include landscape {
+    @include flex(flex, flex-start, center, row);
+  }
+
+  .about-left {
+    @include flex(flex, flex-start, center, column);
+    @include size(100%, 100%);
+
+    @include landscape {
+      @include flex(flex, flex-start, flex-start, column);
+      @include size(50%, 100%);
+
+      p {
+        margin-bottom: -10px;
+      }
+
+      p, ul {
+        @include font('ultra-small');
+      }
+
+      p > strong {
+        @include font('ultra-small', 700);
+      }
+
+      ul {
+        margin-bottom: -5px;
+      }
+
+      ul > li {
+        @include font('ultra-small');
+        margin-bottom: -10px;
+      }
+    }
+  }
+
+  .about-right {
+    @include flex(flex, flex-start, center, column);
+    @include size(100%, 100%);
+
+    @include landscape {
+      @include size(50%, 100%);
+    }
+
+    p:first-of-type {
+      margin-top: 75px;
+    }
+
+    p:last-of-type {
+      @include font('ultra-small');
+    }
   }
 }

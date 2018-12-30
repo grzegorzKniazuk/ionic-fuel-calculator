@@ -1,13 +1,12 @@
 import { Injectable } from '@angular/core';
-import { Storage } from "@ionic/storage";
-import {SettingsData} from "../interfaces/settings-data";
-import {BehaviorSubject} from "rxjs";
-import {ToastService} from "./toast.service";
-import {ToastMessages} from "../enums/toast-messages.enum";
-import {MoneyUnits} from "../enums/money-units.enum";
-import {MetricUnits} from "../enums/metric-units.enum";
-import {RefuelingHistoryData} from "../interfaces/refueling-history-data";
-import {NewEntryRefuelingHistoryData} from "../interfaces/new-entry-refueling-history-data";
+import { Storage } from '@ionic/storage';
+import {SettingsData} from '../interfaces/settings-data';
+import {BehaviorSubject} from 'rxjs';
+import {ToastService} from './toast.service';
+import {ToastMessages} from '../enums/toast-messages.enum';
+import {MoneyUnits} from '../enums/money-units.enum';
+import {MetricUnits} from '../enums/metric-units.enum';
+import {RefuelingHistoryData} from '../interfaces/refueling-history-data';
 
 @Injectable({
   providedIn: 'root',
@@ -25,8 +24,11 @@ export class StorageService {
       if (data) {
         this.refuelingHistoryData = data;
         this.refuelingHistoryData$.next(data);
+      } else {
+        this.refuelingHistoryData = [];
+        this.refuelingHistoryData$.next([]);
       }
-    })
+    });
   }
 
   public loadApplicationSettings(): void {
@@ -52,8 +54,17 @@ export class StorageService {
     });
   }
 
-  public saveNewRefuelingDataEntry(data: NewEntryRefuelingHistoryData): void {
+  public saveNewRefuelingDataEntry(data: RefuelingHistoryData): void {
     // TODO save new entry
-    this.storage.set('data', this.refuelingHistoryData);
+    this.loadRefuelingHistoryData();
+    this.refuelingHistoryData.push(data);
+    console.log(this.refuelingHistoryData);
+    this.storage.set('data', this.refuelingHistoryData).then(() => {
+      this.loadRefuelingHistoryData();
+      console.log(this.refuelingHistoryData);
+      this.toastService.success(ToastMessages.savedSuccessfully);
+    }).catch((error) => {
+      this.toastService.error(error);
+    });
   }
 }

@@ -1,6 +1,7 @@
-import {NewEntryRefuelingHistoryData} from "./new-entry-refueling-history-data";
-
-export interface RefuelingHistoryData extends NewEntryRefuelingHistoryData {
-    averageFuelConsumption: string;
-    pricePerDistanceUnit: string;
+export interface RefuelingHistoryData {
+    date: Date;
+    mileage: string;
+    amountOfFuel: string;
+    fuelCostPerUnit: string;
+    fuelCost: string;
 }

@@ -1,12 +1,12 @@
 import {ChangeDetectionStrategy, Component, Input, OnDestroy, OnInit} from '@angular/core';
-import {MatDialogRef} from "@angular/material";
-import {FormGroup} from "@angular/forms";
-import {FormService} from "../../../services/form.service";
-import {SettingsData} from "../../../interfaces/settings-data";
-import {combineLatest, Observable} from "rxjs";
-import {filter, map} from "rxjs/operators";
-import {AutoUnsubscribe} from "ngx-auto-unsubscribe";
-import {StorageService} from "../../../services/storage.service";
+import {MatDialogRef} from '@angular/material';
+import {FormGroup} from '@angular/forms';
+import {FormService} from '../../../services/form.service';
+import {SettingsData} from '../../../interfaces/settings-data';
+import {combineLatest, Observable} from 'rxjs';
+import {filter, map} from 'rxjs/operators';
+import {AutoUnsubscribe} from 'ngx-auto-unsubscribe';
+import {StorageService} from '../../../services/storage.service';
 
 @AutoUnsubscribe()
 @Component({
@@ -63,13 +63,14 @@ export class FormEntryComponent implements OnInit, OnDestroy {
           return !isNaN(parseFloat(values[0])) && !isNaN(parseFloat(values[1]));
         }))
         .subscribe((values: [ string, string ]) => {
-          this.refuelingForm.get('fuelCost').setValue(parseFloat(values[0]) * parseFloat(values[1]));
+          this.refuelingForm.get('fuelCost').setValue((parseFloat(values[0]) * parseFloat(values[1])).toFixed(2));
     });
   }
 
   public saveNewEntry(): void {
     if (this.refuelingForm.valid) {
-
+      this.storageService.saveNewRefuelingDataEntry(this.refuelingForm.value);
+      this.matDialogRef.close();
     }
   }
 }

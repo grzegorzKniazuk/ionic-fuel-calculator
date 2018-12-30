@@ -1,18 +1,16 @@
 import { Injectable } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from "@angular/forms";
-import { FloatNumberOnlyValidator } from "../../shared/validators/float-numbers-only.validator";
-import { MoneyUnits } from "../enums/money-units.enum";
-import { IntegerNumberOnlyValidator } from "../../shared/validators/int-numbers-only.validator";
-import { NewEntryRefuelingHistoryData } from "../interfaces/new-entry-refueling-history-data";
-import { Storage } from "@ionic/storage";
-import { MetricUnits } from "../enums/metric-units.enum";
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FloatNumberOnlyValidator } from '../../shared/validators/float-numbers-only.validator';
+import { MoneyUnits } from '../enums/money-units.enum';
+import { IntegerNumberOnlyValidator } from '../../shared/validators/int-numbers-only.validator';
+import { MetricUnits } from '../enums/metric-units.enum';
 
 @Injectable({
   providedIn: 'root',
 })
 export class FormService {
 
-  constructor(private formBuilder: FormBuilder, private storage: Storage) { }
+  constructor(private formBuilder: FormBuilder) { }
 
   public get settingsForm(): FormGroup {
     return this.formBuilder.group({
@@ -42,17 +40,16 @@ export class FormService {
       averageFuelConsumption: [ '', [ Validators.required, FloatNumberOnlyValidator, Validators.min(1) ] ],
       fuelCost: [ '', [ Validators.required, FloatNumberOnlyValidator, Validators.min(1) ] ],
       costPerUnit: [ '', [ Validators.required, FloatNumberOnlyValidator, Validators.min(1) ] ],
-    })
+    });
   }
 
   public get refuelingForm(): FormGroup {
     return this.formBuilder.group({
       date: [ '', [ Validators.required ]],
       mileage: ['', [ Validators.required, Validators.min(1), IntegerNumberOnlyValidator ]],
-      averageFuelConsumptionByComputer: ['', [ Validators.required, Validators.min(1), FloatNumberOnlyValidator ]],
       amountOfFuel: ['', [ Validators.required, Validators.min(1), FloatNumberOnlyValidator ]],
       fuelCostPerUnit: ['', [ Validators.required, Validators.min(1), FloatNumberOnlyValidator ]],
       fuelCost: ['', [ Validators.required, Validators.min(1), FloatNumberOnlyValidator ]],
-    })
+    });
   }
 }
