@@ -36,10 +36,16 @@ export class StorageService {
       if (data) {
         this.applicationSettings$.next(data);
       } else {
-        this.toastService.success(ToastMessages.defaultSettingsLoaded);
-        this.applicationSettings$.next({
+        this.storage.set('settings', {
           metricUnits: MetricUnits.PL,
           moneyUnits: MoneyUnits.pln,
+        }).then(() => {
+          console.log('a');
+          this.toastService.success(ToastMessages.defaultSettingsLoaded);
+          this.applicationSettings$.next({
+            metricUnits: MetricUnits.PL,
+            moneyUnits: MoneyUnits.pln,
+          });
         });
       }
     });
