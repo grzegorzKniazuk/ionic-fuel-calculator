@@ -1,0 +1,27 @@
+<mat-card class="data-container">
+  <mat-card-header>
+    <mat-card-title><mat-icon>date_range</mat-icon> {{ data.date | date }}</mat-card-title>
+  </mat-card-header>
+  <mat-card-content class="card-content">
+    <div>
+      <p>Mileage:</p>
+      <p>Amount of fuel:</p>
+      <p>Fuel cost:</p>
+      <p>Fuel cost per unit:</p>
+    </div>
+    <div>
+      <p><strong>{{ data.mileage }}</strong> {{ (storageService.applicationSettings$ | async)?.metricUnits === 'PL' ? 'km' : 'miles' }}</p>
+      <p><strong>{{ data.amountOfFuel }}</strong> {{ (storageService.applicationSettings$ | async)?.metricUnits === 'PL' ? 'l' : 'gal' }}</p>
+      <p><strong>{{ data.fuelCost }}</strong> {{ (storageService.applicationSettings$ | async)?.metricUnits === 'PL' ? 'pln' : '$' }}</p>
+      <p><strong>{{ data.fuelCostPerUnit }}</strong> {{ (storageService.applicationSettings$ | async)?.metricUnits === 'PL' ? 'pln' : '$' }}</p>
+    </div>
+  </mat-card-content>
+  <mat-card-actions class="card-actions">
+    <button mat-raised-button
+            (click)="openModifyEntryModal()"
+            color="primary">edit</button>
+    <button mat-raised-button
+            (click)="openDeleteConfirmModal()"
+            color="warn">delete</button>
+  </mat-card-actions>
+</mat-card>

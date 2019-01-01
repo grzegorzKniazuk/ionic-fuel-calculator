@@ -1,12 +1,13 @@
-import {ChangeDetectionStrategy, Component, Input, OnDestroy, OnInit} from '@angular/core';
-import {MatDialogRef} from '@angular/material';
-import {FormGroup} from '@angular/forms';
-import {FormService} from '../../../services/form.service';
-import {SettingsData} from '../../../interfaces/settings-data';
-import {combineLatest, Observable} from 'rxjs';
-import {filter, map} from 'rxjs/operators';
-import {AutoUnsubscribe} from 'ngx-auto-unsubscribe';
-import {StorageService} from '../../../services/storage.service';
+import { ChangeDetectionStrategy, Component, Input, OnDestroy, OnInit } from '@angular/core';
+import { MatDialogRef } from '@angular/material';
+import { FormGroup } from '@angular/forms';
+import { FormService } from '../../../services/form.service';
+import { combineLatest, Observable } from 'rxjs';
+import { filter, map } from 'rxjs/operators';
+import { AutoUnsubscribe } from 'ngx-auto-unsubscribe';
+import { StorageService } from '../../../services/storage.service';
+import { DialogComponentResponse } from '../../../enums/dialog-component-response.enum';
+import { RefuelingHistoryData } from '../../../interfaces/refueling-history-data';
 
 @AutoUnsubscribe()
 @Component({
@@ -17,9 +18,10 @@ import {StorageService} from '../../../services/storage.service';
 })
 export class FormEntryComponent implements OnInit, OnDestroy {
 
-  @Input() public applicationSettings: SettingsData;
   public today: Date;
   public refuelingForm: FormGroup;
+  @Input() public entryData?: RefuelingHistoryData;
+
   constructor(private matDialogRef: MatDialogRef<FormEntryComponent>,
               public storageService: StorageService,
               private formService: FormService) {
@@ -28,6 +30,7 @@ export class FormEntryComponent implements OnInit, OnDestroy {
   ngOnInit() {
     this.initDate();
     this.buildForm();
+    this.initFormData();
     this.watchTotalCost();
   }
 
@@ -43,6 +46,12 @@ export class FormEntryComponent implements OnInit, OnDestroy {
 
   private buildForm(): void {
     this.refuelingForm = this.formService.refuelingForm;
+  }
+
+  private initFormData(): void {
+    if (this.entryData) {
+      this.refuelingForm.setValue(this.entryData);
+    }
   }
 
   private get amountOfFuelValue(): Observable<string> {
@@ -67,10 +76,13 @@ export class FormEntryComponent implements OnInit, OnDestroy {
     });
   }
 
-  public saveNewEntry(): void {
-    if (this.refuelingForm.valid) {
+  public saveEntry(): void {
+    if (this.refuelingForm.valid && !this.entryData) {
       this.storageService.saveNewRefuelingDataEntry(this.refuelingForm.value);
-      this.matDialogRef.close();
+      this.matDialogRef.close(DialogComponentResponse.saved);
+    } else if (this.refuelingForm.valid && this.entryData) {
+      this.storageService.modifyDataEntry(this.entryData.mileage, this.refuelingForm.value);
+      this.matDialogRef.close(DialogComponentResponse.saved);
     }
   }
 }

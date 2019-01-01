@@ -11,6 +11,12 @@
     <h4>There is no refueling history</h4>
     <h6>Click to + to add a new entry</h6>
   </div>
+  <div class="refueling-data">
+    <app-history-data-entry *ngFor="let data of refuelingHistoryData"
+                            [data]="data"
+                            (openModifyModal$)="openModifyEntryModal(data)"
+                            (openConfirmModal$)="openConfirmModal(data.mileage)"></app-history-data-entry>
+  </div>
   <button class="new-history-entry-button"
           (click)="openNewEntryModal()"
           mat-fab color="primary">

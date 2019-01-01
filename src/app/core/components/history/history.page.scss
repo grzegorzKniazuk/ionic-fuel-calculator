@@ -8,7 +8,11 @@
   }
 }
 
+.refueling-data {
+  @include flex(flex, center, center, row, static, wrap);
+}
+
 .new-history-entry-button {
-  position: absolute;
-  @include position(auto, 15px, 15px, auto);
+  position: fixed;
+  @include position(auto, 15px, 65px, auto);
 }

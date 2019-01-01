@@ -1,0 +1,17 @@
+@import "./src/assets/styles/base.scss";
+
+.data-container {
+  margin: 15px;
+
+  .card-content {
+    @include flex(flex, center, center, row);
+
+    div:first-of-type {
+      padding-right: 10px;
+    }
+  }
+
+  .card-actions {
+    @include flex(flex, center, center);
+  }
+}

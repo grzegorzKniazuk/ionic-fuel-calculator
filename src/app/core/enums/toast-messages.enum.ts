@@ -3,4 +3,5 @@ export enum ToastMessages {
     newHistoryEntrySaved = 'New refueling history entry has been saved successfully',
     defaultSettingsLoaded = 'The application\'s default settings have been loaded',
     savedSuccessfully = 'Saved successfully',
+    deletedSuccessfully = 'Deleted successfully',
 }

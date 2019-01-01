@@ -1,4 +1,5 @@
-<app-form-header>new entry</app-form-header>
+<app-form-header *ngIf="!entryData">new entry</app-form-header>
+<app-form-header *ngIf="entryData">edit entry</app-form-header>
 <mat-dialog-content align="center">
   <form [formGroup]="refuelingForm">
     <mat-form-field>
@@ -68,7 +69,7 @@
 <mat-dialog-actions align="center">
   <button type="submit"
           [disabled]="refuelingForm.invalid"
-          (click)="saveNewEntry()"
+          (click)="saveEntry()"
           mat-raised-button color="primary">save</button>
   <button type="button" mat-raised-button mat-dialog-close color="warn">abort</button>
 </mat-dialog-actions>

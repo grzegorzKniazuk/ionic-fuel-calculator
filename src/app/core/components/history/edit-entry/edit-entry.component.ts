@@ -1,4 +1,6 @@
-import {ChangeDetectionStrategy, Component} from '@angular/core';
+import { ChangeDetectionStrategy, Component, Inject } from '@angular/core';
+import { MAT_DIALOG_DATA } from '@angular/material';
+import { RefuelingHistoryData } from '../../../interfaces/refueling-history-data';
 
 @Component({
   selector: 'app-edit-entry',
@@ -6,4 +8,6 @@ import {ChangeDetectionStrategy, Component} from '@angular/core';
   styleUrls: ['./edit-entry.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class EditEntryComponent {}
+export class EditEntryComponent {
+  constructor(@Inject(MAT_DIALOG_DATA) public data: RefuelingHistoryData) {}
+}
