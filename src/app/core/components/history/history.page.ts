@@ -2,14 +2,13 @@ import { ChangeDetectionStrategy, ChangeDetectorRef, Component, OnDestroy, OnIni
 import { RefuelingHistoryData } from '../../interfaces/refueling-history-data';
 import { MatBottomSheet, MatDialog } from '@angular/material';
 import { NewEntryComponent } from './new-entry/new-entry.component';
-import { ToastService } from '../../services/toast.service';
-import { ToastMessages } from '../../enums/toast-messages.enum';
 import { DialogComponentResponse } from '../../enums/dialog-component-response.enum';
 import { AutoUnsubscribe } from 'ngx-auto-unsubscribe';
 import { StorageService } from '../../services/storage.service';
 import { ConfirmModalComponent } from '../../../shared/components/confirm-modal/confirm-modal.component';
 import { ConfirmResponseType } from '../../enums/confirm-response-type.enum';
 import { EditEntryComponent } from './edit-entry/edit-entry.component';
+import { SortModalComponent } from '../../../shared/components/sort-modal/sort-modal.component';
 
 @AutoUnsubscribe()
 @Component({
@@ -23,8 +22,7 @@ export class HistoryPage implements OnInit, OnDestroy {
   constructor(private matDialog: MatDialog,
               private changeDetectorRef: ChangeDetectorRef,
               private storageService: StorageService,
-              private matBottomSheet: MatBottomSheet,
-              private toastService: ToastService) {}
+              private matBottomSheet: MatBottomSheet) {}
 
   ngOnInit() {
   	this.storageService.loadRefuelingHistoryData();
@@ -66,5 +64,11 @@ export class HistoryPage implements OnInit, OnDestroy {
 				this.changeDetectorRef.detectChanges();
 		  }
 	  });
+  }
+
+  public openSortModal(): void {
+		this.matDialog.open(SortModalComponent).afterClosed().subscribe(() => {
+			this.changeDetectorRef.detectChanges();
+		});
   }
 }

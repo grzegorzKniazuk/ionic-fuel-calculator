@@ -1,0 +1,54 @@
+<app-form-header>sort options</app-form-header>
+<mat-dialog-content align="start" [formGroup]="sortForm">
+  <div>
+    <strong>Sort by date</strong>
+    <p>
+      <mat-radio-group label="after" formControlName="date">
+        <mat-radio-button name="date" value="desc">by latest</mat-radio-button>
+        <mat-radio-button name="date" value="asc">by eldest</mat-radio-button>
+      </mat-radio-group>
+    </p>
+    <strong>Sort by mileage</strong>
+    <p>
+      <mat-radio-group label="after" formControlName="mileage">
+        <mat-radio-button name="mileage" value="desc">descending</mat-radio-button>
+        <mat-radio-button name="mileage" value="asc">ascending</mat-radio-button>
+      </mat-radio-group>
+    </p>
+    <strong>Sort by distance covered</strong>
+    <p>
+      <mat-radio-group label="after" formControlName="distance">
+        <mat-radio-button name="distance" value="desc">by longest distance</mat-radio-button>
+        <mat-radio-button name="distance" value="asc">by shortest distance</mat-radio-button>
+      </mat-radio-group>
+    </p>
+    <strong>Sort by amount of fuel</strong>
+    <p>
+      <mat-radio-group label="after" formControlName="amountOfFuel">
+        <mat-radio-button name="amountOfFuel" value="desc">descending</mat-radio-button>
+        <mat-radio-button name="amountOfFuel" value="asc">ascending</mat-radio-button>
+      </mat-radio-group>
+    </p>
+    <strong>Sort by distance covered</strong>
+    <p>
+      <mat-radio-group label="after" formControlName="fuelCostPerUnit">
+        <mat-radio-button name="fuelCostPerUnit" value="desc">descending</mat-radio-button>
+        <mat-radio-button name="fuelCostPerUnit" value="asc">ascending</mat-radio-button>
+      </mat-radio-group>
+    </p>
+    <strong>Sort by distance covered</strong>
+    <p>
+      <mat-radio-group label="after" formControlName="fuelCost">
+        <mat-radio-button name="fuelCost" value="desc">descending</mat-radio-button>
+        <mat-radio-button name="fuelCost" value="asc">ascending</mat-radio-button>
+      </mat-radio-group>
+    </p>
+  </div>
+</mat-dialog-content>
+<mat-dialog-actions align="center">
+  <button type="submit"
+          [disabled]="sortForm.invalid"
+          (click)="updateSortCriteria()"
+          mat-raised-button color="primary">save</button>
+  <button type="button" mat-raised-button mat-dialog-close color="warn">abort</button>
+</mat-dialog-actions>

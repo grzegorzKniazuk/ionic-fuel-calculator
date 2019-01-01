@@ -5,6 +5,8 @@ import { CommaToDotDirective } from './directives/comma-to-dot.directive';
 import { HistoryDataEntryComponent } from './components/history-data-entry/history-data-entry.component';
 import { MaterialModule } from '../material.module';
 import { ConfirmModalComponent } from './components/confirm-modal/confirm-modal.component';
+import { SortModalComponent } from './components/sort-modal/sort-modal.component';
+import { ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -12,13 +14,16 @@ import { ConfirmModalComponent } from './components/confirm-modal/confirm-modal.
       CommaToDotDirective,
       HistoryDataEntryComponent,
       ConfirmModalComponent,
+      SortModalComponent,
   ],
   imports: [
       CommonModule,
       MaterialModule,
+      ReactiveFormsModule,
   ],
   entryComponents: [
       ConfirmModalComponent,
+      SortModalComponent,
   ],
   exports: [
       FormHeaderComponent,

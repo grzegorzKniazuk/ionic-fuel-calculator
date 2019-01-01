@@ -7,6 +7,7 @@ import {ToastMessages} from '../enums/toast-messages.enum';
 import {MoneyUnits} from '../enums/money-units.enum';
 import {MetricUnits} from '../enums/metric-units.enum';
 import {RefuelingHistoryData} from '../interfaces/refueling-history-data';
+import { SortCriteria } from '../interfaces/sort-criteria';
 
 @Injectable({
   providedIn: 'root',
@@ -16,6 +17,7 @@ export class StorageService {
   private refuelingHistoryData: RefuelingHistoryData[] = [];
   public readonly refuelingHistoryData$: BehaviorSubject<RefuelingHistoryData[]> = new BehaviorSubject<RefuelingHistoryData[]>([]);
   public readonly applicationSettings$: BehaviorSubject<SettingsData> = new BehaviorSubject<SettingsData>(null);
+  public readonly sortCriteriaSettings$: BehaviorSubject<SortCriteria> = new BehaviorSubject<SortCriteria>(null);
 
   constructor(private storage: Storage, private toastService: ToastService) { }
 
@@ -93,5 +95,9 @@ export class StorageService {
   public modifyDataEntry(mileage: string, data: RefuelingHistoryData): void {
     this.modifyEntryArray(mileage);
     this.addEntry(data);
+  }
+
+  public updateSortCriteria(criteria: SortCriteria): void {
+    this.sortCriteriaSettings$.next(criteria);
   }
 }

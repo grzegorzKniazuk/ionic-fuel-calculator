@@ -12,7 +12,7 @@
     <mat-form-field [hideRequiredMarker]="false">
       <input formControlName="mileage"
              matInput
-             type="text"
+             type="number"
              required
              placeholder="Mileage">
       <mat-error *ngIf="refuelingForm.get('mileage').hasError('required')">This field is required</mat-error>
@@ -25,7 +25,7 @@
     <mat-form-field [hideRequiredMarker]="false">
       <input formControlName="amountOfFuel"
              matInput
-             type="text"
+             type="number"
              required
              appCommaToDot
              placeholder="Amount of fuel">
@@ -39,7 +39,7 @@
     <mat-form-field [hideRequiredMarker]="false">
       <input formControlName="fuelCostPerUnit"
              matInput
-             type="text"
+             type="number"
              required
              appCommaToDot
              [placeholder]="(storageService.applicationSettings$ | async)?.metricUnits === 'PL' ? 'Fuel cost per  liter' : 'Fuel cost per gallon'">
@@ -53,7 +53,7 @@
     <mat-form-field [hideRequiredMarker]="false">
       <input formControlName="fuelCost"
              matInput
-             type="text"
+             type="number"
              required
              appCommaToDot
              placeholder="Fuel total cost">

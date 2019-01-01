@@ -4,6 +4,7 @@ import { FloatNumberOnlyValidator } from '../../shared/validators/float-numbers-
 import { MoneyUnits } from '../enums/money-units.enum';
 import { IntegerNumberOnlyValidator } from '../../shared/validators/int-numbers-only.validator';
 import { MetricUnits } from '../enums/metric-units.enum';
+import { SortType } from '../enums/sort-type.enum';
 
 @Injectable({
   providedIn: 'root',
@@ -50,6 +51,17 @@ export class FormService {
       amountOfFuel: ['', [ Validators.required, Validators.min(1), FloatNumberOnlyValidator ]],
       fuelCostPerUnit: ['', [ Validators.required, Validators.min(1), FloatNumberOnlyValidator ]],
       fuelCost: ['', [ Validators.required, Validators.min(1), FloatNumberOnlyValidator ]],
+    });
+  }
+
+  public get sortForm(): FormGroup {
+    return this.formBuilder.group({
+      date: [ SortType.DESC , [ Validators.required, Validators.pattern(/asc|desc/) ] ],
+      mileage: ['', [ Validators.pattern(/asc|desc/) ]],
+      distance: ['', [ Validators.pattern(/asc|desc/) ]],
+      amountOfFuel: ['', [ Validators.pattern(/asc|desc/) ]],
+      fuelCostPerUnit: ['', [ Validators.pattern(/asc|desc/) ]],
+      fuelCost: ['', [ Validators.pattern(/asc|desc/) ]],
     });
   }
 }
