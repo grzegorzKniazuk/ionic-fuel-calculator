@@ -1,9 +1,9 @@
-<app-form-header *ngIf="!entryData">new entry</app-form-header>
-<app-form-header *ngIf="entryData">edit entry</app-form-header>
+<app-form-header *ngIf="!entryData">Nowe tankowanie</app-form-header>
+<app-form-header *ngIf="entryData">Edycja tankowania</app-form-header>
 <mat-dialog-content align="center">
   <form [formGroup]="refuelingForm">
     <mat-form-field>
-      <input formControlName="date" matInput [max]="today" [matDatepicker]="picker" placeholder="Choose a date">
+      <input formControlName="date" matInput [max]="today" [matDatepicker]="picker" placeholder="Data tankowania">
       <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
       <mat-datepicker touchUi #picker></mat-datepicker>
       <mat-error *ngIf="refuelingForm.get('date').hasError('required') && !refuelingForm.get('date').hasError('matDatepickerParse')">This field is required</mat-error>
@@ -14,7 +14,7 @@
              matInput
              type="number"
              required
-             placeholder="Mileage">
+             placeholder="Przebieg">
       <mat-error *ngIf="refuelingForm.get('mileage').hasError('required')">This field is required</mat-error>
       <mat-error *ngIf="refuelingForm.get('mileage').hasError('min')
                    && !refuelingForm.get('mileage').hasError('required')">The minimum value is 1</mat-error>
@@ -28,7 +28,7 @@
              type="number"
              required
              appCommaToDot
-             placeholder="Amount of fuel">
+             placeholder="Ilość paliwa">
       <mat-error *ngIf="refuelingForm.get('amountOfFuel').hasError('required')">This field is required</mat-error>
       <mat-error *ngIf="refuelingForm.get('amountOfFuel').hasError('min')
                    && !refuelingForm.get('amountOfFuel').hasError('required')">The minimum value is 1</mat-error>
@@ -42,7 +42,7 @@
              type="number"
              required
              appCommaToDot
-             [placeholder]="(storageService.applicationSettings$ | async)?.metricUnits === 'PL' ? 'Fuel cost per  liter' : 'Fuel cost per gallon'">
+             placeholder="Koszt 1 litra">
       <mat-error *ngIf="refuelingForm.get('fuelCostPerUnit').hasError('required')">This field is required</mat-error>
       <mat-error *ngIf="refuelingForm.get('fuelCostPerUnit').hasError('min')
                    && !refuelingForm.get('fuelCostPerUnit').hasError('required')">The minimum value is 1</mat-error>
@@ -56,7 +56,7 @@
              type="number"
              required
              appCommaToDot
-             placeholder="Fuel total cost">
+             placeholder="Łączny koszt paliwa">
       <mat-error *ngIf="refuelingForm.get('fuelCost').hasError('required')">This field is required</mat-error>
       <mat-error *ngIf="refuelingForm.get('fuelCost').hasError('min')
                    && !refuelingForm.get('fuelCost').hasError('required')">The minimum value is 1</mat-error>
@@ -70,6 +70,6 @@
   <button type="submit"
           [disabled]="refuelingForm.invalid"
           (click)="saveEntry()"
-          mat-raised-button color="primary">save</button>
-  <button type="button" mat-raised-button mat-dialog-close color="warn">abort</button>
+          mat-raised-button color="primary">Zapisz</button>
+  <button type="button" mat-raised-button mat-dialog-close color="warn">Anuluj</button>
 </mat-dialog-actions>

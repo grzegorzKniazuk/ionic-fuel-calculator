@@ -1,6 +1,6 @@
 import { SortType } from '../enums/sort-type.enum';
 
-export interface SortCriteria {
+export interface RefuelingSortCriteria {
 	date: SortType;
 	mileage: SortType;
 	distance: SortType;

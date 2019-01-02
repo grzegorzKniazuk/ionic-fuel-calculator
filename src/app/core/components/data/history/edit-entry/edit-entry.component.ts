@@ -1,6 +1,6 @@
 import { ChangeDetectionStrategy, Component, Inject } from '@angular/core';
 import { MAT_DIALOG_DATA } from '@angular/material';
-import { RefuelingHistoryData } from '../../../interfaces/refueling-history-data';
+import { RefuelingHistoryData } from '../../../../interfaces/refueling-history-data';
 
 @Component({
   selector: 'app-edit-entry',

@@ -1,0 +1,17 @@
+@import "./src/assets/styles/base.scss";
+
+.no-refueling-data {
+  @include flex(flex, flex-start, center, column);
+  @include max-device-height-360() {
+    h4 {
+      margin: 0;
+    }
+    h6 {
+      margin-top: 5px;
+    }
+  }
+
+  mat-icon {
+    @include mat-icon-size(100px);
+  }
+}

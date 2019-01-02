@@ -1,10 +1,7 @@
 import { Injectable } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { FloatNumberOnlyValidator } from '../../shared/validators/float-numbers-only.validator';
-import { MoneyUnits } from '../enums/money-units.enum';
 import { IntegerNumberOnlyValidator } from '../../shared/validators/int-numbers-only.validator';
-import { MetricUnits } from '../enums/metric-units.enum';
-import { SortType } from '../enums/sort-type.enum';
 
 @Injectable({
   providedIn: 'root',
@@ -12,13 +9,6 @@ import { SortType } from '../enums/sort-type.enum';
 export class FormService {
 
   constructor(private formBuilder: FormBuilder) { }
-
-  public get settingsForm(): FormGroup {
-    return this.formBuilder.group({
-      metricUnits: [ MetricUnits.PL, [ Validators.required ] ],
-      moneyUnits: [ MoneyUnits.pln, [ Validators.required ] ],
-    });
-  }
 
   public get fuelSimulationForm(): FormGroup {
     return this.formBuilder.group({
@@ -56,12 +46,12 @@ export class FormService {
 
   public get sortForm(): FormGroup {
     return this.formBuilder.group({
-      date: [ SortType.DESC , [ Validators.required, Validators.pattern(/asc|desc/) ] ],
-      mileage: ['', [ Validators.pattern(/asc|desc/) ]],
-      distance: ['', [ Validators.pattern(/asc|desc/) ]],
-      amountOfFuel: ['', [ Validators.pattern(/asc|desc/) ]],
-      fuelCostPerUnit: ['', [ Validators.pattern(/asc|desc/) ]],
-      fuelCost: ['', [ Validators.pattern(/asc|desc/) ]],
+      date: [''],
+      mileage: [''],
+      distance: [''],
+      amountOfFuel: [''],
+      fuelCostPerUnit: [''],
+      fuelCost: [''],
     });
   }
 }

@@ -4,9 +4,8 @@ import { Routes, RouterModule } from '@angular/router';
 const routes: Routes = [
   { path: '', redirectTo: 'calculator', pathMatch: 'full' },
   { path: 'calculator', loadChildren: './core/components/calculator/calculator.module#CalculatorPageModule' },
-  { path: 'settings', loadChildren: './core/components/settings/settings.module#SettingsPageModule' },
-  { path: 'history', loadChildren: './core/components/history/history.module#HistoryPageModule' },
   { path: 'about', loadChildren: './core/components/about/about.module#AboutPageModule' },
+  { path: 'data', loadChildren: './core/components/data/data.module#DataPageModule' },
 ];
 
 @NgModule({

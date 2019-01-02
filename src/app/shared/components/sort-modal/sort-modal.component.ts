@@ -1,7 +1,7 @@
 import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 import { FormService } from '../../../core/services/form.service';
 import { FormGroup } from '@angular/forms';
-import { StorageService } from '../../../core/services/storage.service';
+import { MatDialogRef } from '@angular/material';
 
 @Component({
   selector: 'app-sort-modal',
@@ -13,7 +13,8 @@ export class SortModalComponent implements OnInit {
 
   public sortForm: FormGroup;
 
-  constructor(private formService: FormService, private storageService: StorageService) {}
+  constructor(private matDialogRef: MatDialogRef<SortModalComponent>,
+              private formService: FormService) {}
 
   public ngOnInit(): void {
     this.initForm();
@@ -25,7 +26,7 @@ export class SortModalComponent implements OnInit {
 
   private updateSortCriteria(): void {
     if (this.sortForm.valid) {
-      this.storageService.updateSortCriteria(this.sortForm.value);
+      this.matDialogRef.close(this.sortForm.value);
     }
   }
 }

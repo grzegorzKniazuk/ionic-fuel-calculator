@@ -3,12 +3,12 @@ import { RefuelingHistoryData } from '../../../core/interfaces/refueling-history
 import { StorageService } from '../../../core/services/storage.service';
 
 @Component({
-  selector: 'app-history-data-entry',
-  templateUrl: './history-data-entry.component.html',
-  styleUrls: ['./history-data-entry.component.scss'],
+  selector: 'app-refueling-history-data-entry',
+  templateUrl: './refueling-history-data-entry.component.html',
+  styleUrls: ['./refueling-history-data-entry.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class HistoryDataEntryComponent {
+export class RefuelingHistoryDataEntryComponent {
 
   @Output() public openConfirmModal$: EventEmitter<boolean> = new EventEmitter();
   @Output() public openModifyModal$: EventEmitter<boolean> = new EventEmitter();

@@ -1,7 +1,8 @@
 export interface RefuelingHistoryData {
     date: Date;
-    mileage: string;
-    amountOfFuel: string;
-    fuelCostPerUnit: string;
-    fuelCost: string;
+    mileage: number;
+    distance?: number;
+    amountOfFuel: number;
+    fuelCostPerUnit: number;
+    fuelCost: number;
 }
