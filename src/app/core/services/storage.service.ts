@@ -4,6 +4,7 @@ import {BehaviorSubject} from 'rxjs';
 import {ToastService} from './toast.service';
 import {ToastMessages} from '../enums/toast-messages.enum';
 import {RefuelingHistoryData} from '../interfaces/refueling-history-data';
+import { CarData } from '../interfaces/car-data';
 
 @Injectable({
   providedIn: 'root',
@@ -11,9 +12,11 @@ import {RefuelingHistoryData} from '../interfaces/refueling-history-data';
 export class StorageService {
 
   private refuelingHistoryData: RefuelingHistoryData[] = [];
-  public readonly refuelingHistoryData$: BehaviorSubject<RefuelingHistoryData[]> = new BehaviorSubject<RefuelingHistoryData[]>([]);
+  public readonly refuelingHistoryData$: BehaviorSubject<RefuelingHistoryData[]> = new BehaviorSubject([]);
+  public readonly carData$: BehaviorSubject<CarData> = new BehaviorSubject(null);
 
-  constructor(private storage: Storage, private toastService: ToastService) { }
+  constructor(private storage: Storage,
+              private toastService: ToastService) { }
 
   public loadRefuelingHistoryData(): void {
     this.storage.get('data').then((data: RefuelingHistoryData[]) => {
@@ -53,7 +56,6 @@ export class StorageService {
 
   public deleteDataEntry(mileage: number): void {
   	this.modifyEntryArray(mileage);
-  	this.storage.remove('data');
   	this.storage.set('data', this.refuelingHistoryData);
   	this.refuelingHistoryData$.next(this.refuelingHistoryData);
 	  this.toastService.success(ToastMessages.deletedSuccessfully);
@@ -62,5 +64,19 @@ export class StorageService {
   public modifyDataEntry(mileage: number, data: RefuelingHistoryData): void {
     this.modifyEntryArray(mileage);
     this.addEntry(data);
+  }
+
+  public loadCarData(): void {
+    this.storage.get('car-data').then((carData: CarData) => {
+      if (carData) {
+        this.carData$.next(carData);
+      }
+    });
+  }
+
+  public updateCarData(data: CarData): void {
+    this.storage.set('car-data', data);
+    this.loadCarData();
+    this.toastService.success(ToastMessages.savedSuccessfully);
   }
 }

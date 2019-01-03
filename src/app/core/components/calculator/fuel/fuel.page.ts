@@ -4,7 +4,7 @@ import {FormGroup} from '@angular/forms';
 import {FuelSimulationData} from '../../../interfaces/fuel-simulation-data';
 import {filter, tap} from 'rxjs/operators';
 import {AutoUnsubscribe} from 'ngx-auto-unsubscribe';
-import {StorageService} from '../../../services/storage.service';
+import { CalculatorModel } from '../../../models/calculator.model';
 
 @AutoUnsubscribe()
 @Component({
@@ -13,14 +13,14 @@ import {StorageService} from '../../../services/storage.service';
   styleUrls: ['./fuel.page.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class FuelPage implements OnInit, OnDestroy {
+export class FuelPage extends CalculatorModel implements OnInit, OnDestroy {
 
   public fuelConsumption: number;
   public travelCost: number;
   public fuelSimulationForm: FormGroup;
 
-  constructor(private formService: FormService,
-              public storageService: StorageService) {
+  constructor(private formService: FormService) {
+    super();
   }
 
   ngOnInit(): void {

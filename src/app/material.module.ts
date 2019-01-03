@@ -18,12 +18,14 @@ const MAT_SNACKBAR_GLOBAL_CONFIG: MatSnackBarConfig = {
 
 const MAT_DIALOG_GLOBAL_CONFIG: MatDialogConfig = {
     width: '90%',
+    maxHeight: '95%',
     disableClose: true,
     hasBackdrop: true,
+    autoFocus: true,
+    role: 'dialog',
 };
 
 @NgModule({
-    declarations: [],
     imports: [
         MatIconModule,
         MatInputModule,

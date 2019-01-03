@@ -2,9 +2,10 @@
 
 .form-header-wrapper {
   position: relative;
-  @include position(-40px, auto, auto, -24px);
+  @include position(0, auto, auto, -24px);
   width: calc(100% + 24px);
   z-index: 1001; // required for custom material dialog header
+  margin-bottom: 12px;
 
   .form-header {
     @include flex(flex, center, center);
@@ -15,5 +16,17 @@
     background: $material-indigo-pink-background;
     border-top-left-radius: $border-radius;
     border-top-right-radius: $border-radius;
+
+    h1 {
+      &.small {
+        @include font('small');
+      }
+      &.medium {
+        @include font('medium');
+      }
+      &.big {
+        @include font('big');
+      }
+    }
   }
 }

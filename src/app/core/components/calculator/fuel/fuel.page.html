@@ -5,42 +5,45 @@
                    matInput
                    type="number"
                    required
-                   placeholder="Ilość zatankowanych litrów paliwa">
-            <mat-error *ngIf="fuelSimulationForm.get('refiledLiters').hasError('required')">To pole jest wymagane</mat-error>
+                   [placeholder]="formPlaceholder.totalRefueledFuel">
+            <mat-error *ngIf="fuelSimulationForm.get('refiledLiters').hasError('required')">{{ validatorPlaceholder.required }}</mat-error>
             <mat-error
                 *ngIf="fuelSimulationForm.get('refiledLiters').hasError('min')
-                && !fuelSimulationForm.get('refiledLiters').hasError('required')">Minimalna wartość to 1</mat-error>
+                && !fuelSimulationForm.get('refiledLiters').hasError('required')">{{ validatorPlaceholder.minimumValue }}</mat-error>
             <mat-error
                 *ngIf="fuelSimulationForm.get('refiledLiters').hasError('floatNumbersOnly')
                 && !fuelSimulationForm.get('refiledLiters').hasError('min')
-                && !fuelSimulationForm.get('refiledLiters').hasError('required')">Dozwolone są wyłącznie liczby</mat-error>
+                && !fuelSimulationForm.get('refiledLiters').hasError('required')">{{ validatorPlaceholder.numbersOnly }}</mat-error>
         </mat-form-field>
         <mat-form-field [hideRequiredMarker]="false">
             <input formControlName="traveledDistance"
                    matInput
                    type="number"
                    required
-                   placeholder="Liczba przejechanych kilometrów">
-            <mat-error *ngIf="fuelSimulationForm.get('traveledDistance').hasError('required')">To pole jest wymagane</mat-error>
+                   [placeholder]="formPlaceholder.distanceTraveled">
+            <mat-error *ngIf="fuelSimulationForm.get('traveledDistance').hasError('required')">{{ validatorPlaceholder.required }}</mat-error>
             <mat-error
                 *ngIf="fuelSimulationForm.get('traveledDistance').hasError('min')
-                && !fuelSimulationForm.get('traveledDistance').hasError('required')">Minimalna wartość to 1</mat-error>
+                && !fuelSimulationForm.get('traveledDistance').hasError('required')">{{ validatorPlaceholder.minimumValue }}</mat-error>
             <mat-error
                 *ngIf="fuelSimulationForm.get('traveledDistance').hasError('floatNumbersOnly')
                 && !fuelSimulationForm.get('traveledDistance').hasError('min')
-                && !fuelSimulationForm.get('traveledDistance').hasError('required')">Dozwolone są wyłącznie liczby</mat-error>
+                && !fuelSimulationForm.get('traveledDistance').hasError('required')">{{ validatorPlaceholder.numbersOnly }}</mat-error>
         </mat-form-field>
         <mat-form-field>
-            <input formControlName="costPerUnit" matInput type="number" placeholder="Koszt 1 litra paliwa">
-            <mat-error *ngIf="fuelSimulationForm.get('costPerUnit').hasError('min')">Minimalna wartość to 1</mat-error>
+            <input formControlName="costPerUnit"
+                   matInput
+                   type="number"
+                   [placeholder]="formPlaceholder.fuelCostPerUnit">
+            <mat-error *ngIf="fuelSimulationForm.get('costPerUnit').hasError('min')">{{ validatorPlaceholder.minimumValue }}</mat-error>
             <mat-error *ngIf=" fuelSimulationForm.get('costPerUnit').hasError('floatNumbersOnly')
-                                && !fuelSimulationForm.get('costPerUnit').hasError('min')">Dozwolone są wyłącznie liczby</mat-error>
+                                && !fuelSimulationForm.get('costPerUnit').hasError('min')">{{ validatorPlaceholder.numbersOnly }}</mat-error>
         </mat-form-field>
     </div>
     <div class="form-output">
-        <p *ngIf="fuelConsumption">Średnie zużycie paliwa na 100 km</p>
-        <output *ngIf="fuelConsumption">{{ fuelConsumption.toFixed(2) }} <span>litrów</span></output>
-        <p *ngIf="travelCost">Koszt przejechania 100 km</p>
+        <p *ngIf="fuelConsumption">Średnie spalanie paliwa na 100 km:</p>
+        <output *ngIf="fuelConsumption">{{ fuelConsumption.toFixed(2) }} <span>l</span></output>
+        <p *ngIf="travelCost">Koszt przejechania 100 km:</p>
         <output *ngIf="travelCost">{{ travelCost.toFixed(2) }} <span>zł</span></output>
     </div>
 </form>

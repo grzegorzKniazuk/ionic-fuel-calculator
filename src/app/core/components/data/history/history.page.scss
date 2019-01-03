@@ -6,12 +6,12 @@
 
 .new-history-entry-button {
   position: fixed;
-  @include position(60px, auto, auto, 10px);
+  @include position(auto, 10px, 60px, auto);
   z-index: 1;
 }
 
 .sort-modal-button {
   position: fixed;
-  @include position(10px, auto, auto, 10px);
+  @include position(auto, 10px, 10px, auto);
   z-index: 1;
 }

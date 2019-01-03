@@ -1,0 +1,23 @@
+@import "./src/assets/styles/base.scss";
+
+form {
+  @include flex(flex, flex-start, center, column);
+  @include size(100%);
+
+  div {
+    @include flex(flex, flex-start, center, column);
+    @include size(100%);
+
+    @include landscape {
+      @include size(50%);
+    }
+  }
+
+  @include landscape {
+    @include flex(flex, flex-start, center, row);
+  }
+
+  mat-form-field {
+    width: 95%;
+  }
+}

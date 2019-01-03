@@ -1,9 +1,9 @@
 import { ChangeDetectionStrategy, Component, OnDestroy, OnInit } from '@angular/core';
-import { FormService } from "../../../services/form.service";
-import { FormGroup } from "@angular/forms";
-import { AutoUnsubscribe } from "ngx-auto-unsubscribe";
-import { CostSimulationData } from "../../../interfaces/cost-simulation-data";
-import { StorageService } from "../../../services/storage.service";
+import { FormService } from '../../../services/form.service';
+import { FormGroup } from '@angular/forms';
+import { AutoUnsubscribe } from 'ngx-auto-unsubscribe';
+import { CostSimulationData } from '../../../interfaces/cost-simulation-data';
+import { CalculatorModel } from '../../../models/calculator.model';
 
 @AutoUnsubscribe()
 @Component({
@@ -12,14 +12,14 @@ import { StorageService } from "../../../services/storage.service";
   styleUrls: ['./cost.page.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class CostPage implements OnInit, OnDestroy {
+export class CostPage extends CalculatorModel implements OnInit, OnDestroy {
 
   public costSimulationForm: FormGroup;
   public fuelConsumption: number;
   public fuelCost: number;
 
-  constructor(private formService: FormService,
-              public storageService: StorageService) {
+  constructor(private formService: FormService) {
+    super();
   }
 
   ngOnInit() {

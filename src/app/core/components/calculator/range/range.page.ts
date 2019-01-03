@@ -23,7 +23,6 @@ export class RangePage extends CalculatorModel implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
-    super.initPlaceholders();
     this.buildForm();
     this.watchForm();
   }
@@ -39,7 +38,7 @@ export class RangePage extends CalculatorModel implements OnInit, OnDestroy {
     this.rangeSimulationForm.valueChanges.subscribe((data: RangeSimulationData) => {
       if (this.rangeSimulationForm.valid) {
         this.amountOfFuel = parseFloat(data.fuelCost) / parseFloat(data.costPerUnit);
-        this.range = 1;
+        this.range = parseFloat(data.fuelCost) / parseFloat(data.costPerUnit) * 100 / parseFloat(data.averageFuelConsumption);
       } else {
         this.amountOfFuel = 0;
         this.range = 0;

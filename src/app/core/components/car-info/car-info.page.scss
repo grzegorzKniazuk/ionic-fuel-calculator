@@ -1,0 +1,40 @@
+@import "./src/assets/styles/base.scss";
+
+.car-data-container {
+  @include flex(flex, flex-start, center, column, relative);
+
+  @include landscape {
+    @include flex(flex, flex-start, center, row, relative);
+  }
+
+  .camera {
+    @include flex(flex, flex-start, center, column);
+    @include size(100%);
+
+    mat-icon {
+      @include mat-icon-size(100px);
+    }
+
+    @include landscape {
+      @include size(50%);
+    }
+  }
+
+  .car-data {
+    @include flex(flex, center, flex-start, row);
+    @include size(100%);
+
+    .data-label {
+      margin-right: 15px;
+    }
+
+    @include landscape {
+      @include size(50%);
+    }
+  }
+
+  .update-car-button {
+    position: fixed;
+    @include position(auto, 10px, 10px, auto);
+  }
+}

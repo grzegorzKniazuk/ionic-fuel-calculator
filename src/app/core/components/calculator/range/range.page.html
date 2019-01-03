@@ -5,7 +5,7 @@
                    matInput
                    type="number"
                    required
-                   [placeholder]="formPlaceholderData.averageFuelConsumption">
+                   [placeholder]="formPlaceholder.averageFuelConsumption">
             <mat-error *ngIf="rangeSimulationForm.get('averageFuelConsumption').hasError('required')">{{ validatorPlaceholder.required }}</mat-error>
             <mat-error *ngIf="rangeSimulationForm.get('averageFuelConsumption').hasError('min')
                    && !rangeSimulationForm.get('averageFuelConsumption').hasError('required')">{{ validatorPlaceholder.minimumValue }}</mat-error>
@@ -18,7 +18,7 @@
                    matInput
                    type="number"
                    required
-                   [placeholder]="formPlaceholderData.fuelCost">
+                   [placeholder]="formPlaceholder.fuelCost">
             <mat-error *ngIf="rangeSimulationForm.get('fuelCost').hasError('required')">{{ validatorPlaceholder.required }}</mat-error>
             <mat-error *ngIf="rangeSimulationForm.get('fuelCost').hasError('min')
                    && !rangeSimulationForm.get('fuelCost').hasError('required')">{{ validatorPlaceholder.minimumValue }}</mat-error>
@@ -31,7 +31,7 @@
                    matInput
                    type="number"
                    required
-                   [placeholder]="formPlaceholderData.fuelCostPerUnit">
+                   [placeholder]="formPlaceholder.fuelCostPerUnit">
             <mat-error *ngIf="rangeSimulationForm.get('costPerUnit').hasError('required')">{{ validatorPlaceholder.required }}</mat-error>
             <mat-error *ngIf="rangeSimulationForm.get('costPerUnit').hasError('min')
                    && !rangeSimulationForm.get('costPerUnit').hasError('required')">{{ validatorPlaceholder.minimumValue }}</mat-error>
@@ -42,7 +42,7 @@
     </div>
     <div class="form-output">
         <p *ngIf="amountOfFuel">Po zatankowaniu</p>
-        <output *ngIf="amountOfFuel">{{ amountOfFuel.toFixed(2) }} <span>l</span></output>
+        <output *ngIf="amountOfFuel">{{ amountOfFuel.toFixed(2) }} <span>litrów paliwa</span></output>
         <p *ngIf="range">Przewidywany zasięg to</p>
         <output *ngIf="range">{{ range.toFixed(2) }} <span>km</span></output>
     </div>

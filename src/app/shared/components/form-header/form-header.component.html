@@ -1,5 +1,5 @@
 <div class="form-header-wrapper">
   <div class="form-header">
-    <h1><ng-content></ng-content></h1>
+    <h1 [ngClass]="fontSize ? fontSize : '' "><ng-content></ng-content></h1>
   </div>
 </div>

@@ -1,4 +1,5 @@
-import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
+import { FormHeaderFontSize } from '../../../core/enums/form-header-font-size.enum';
 
 @Component({
   selector: 'app-form-header',
@@ -6,4 +7,6 @@ import { ChangeDetectionStrategy, Component } from '@angular/core';
   styleUrls: ['./form-header.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class FormHeaderComponent {}
+export class FormHeaderComponent {
+  @Input() fontSize?: FormHeaderFontSize;
+}

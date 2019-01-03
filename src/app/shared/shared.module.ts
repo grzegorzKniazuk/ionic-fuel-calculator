@@ -9,6 +9,7 @@ import { SortModalComponent } from './components/sort-modal/sort-modal.component
 import { ReactiveFormsModule } from '@angular/forms';
 import { HistorySortPipe } from './pipes/history-sort.pipe';
 import { NoDataComponent } from './components/no-data/no-data.component';
+import { ValidationFeedbackComponent } from './components/validation-feedback/validation-feedback.component';
 
 @NgModule({
   declarations: [
@@ -19,6 +20,7 @@ import { NoDataComponent } from './components/no-data/no-data.component';
     SortModalComponent,
     HistorySortPipe,
     NoDataComponent,
+    ValidationFeedbackComponent,
   ],
   imports: [
     CommonModule,
@@ -34,7 +36,8 @@ import { NoDataComponent } from './components/no-data/no-data.component';
     CommaToDotDirective,
     RefuelingHistoryDataEntryComponent,
     HistorySortPipe,
-    NoDataComponent
+    NoDataComponent,
+    ValidationFeedbackComponent,
   ],
 })
 export class SharedModule { }

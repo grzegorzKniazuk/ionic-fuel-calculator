@@ -43,7 +43,7 @@ export class HistoryPage implements OnInit, OnDestroy {
   }
 
   public openNewEntryModal(): void {
-    this.matDialog.open(NewEntryComponent).afterClosed().subscribe((response: string) => {
+    this.matDialog.open(NewEntryComponent).afterClosed().subscribe((response: DialogComponentResponse) => {
       if (response === DialogComponentResponse.saved) {
 	      this.changeDetectorRef.detectChanges();
       }
@@ -62,7 +62,7 @@ export class HistoryPage implements OnInit, OnDestroy {
 
   public openConfirmModal(mileage: number): void {
   	this.matBottomSheet.open(ConfirmModalComponent).afterDismissed().subscribe((response: ConfirmResponseType) => {
-  		if (response === 'confirm') {
+  		if (response === ConfirmResponseType.confirm) {
 				this.storageService.deleteDataEntry(mileage);
 				this.changeDetectorRef.detectChanges();
 		  }

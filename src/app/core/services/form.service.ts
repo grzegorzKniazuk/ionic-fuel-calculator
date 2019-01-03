@@ -54,4 +54,15 @@ export class FormService {
       fuelCost: [''],
     });
   }
+
+  public get carInfoForm(): FormGroup {
+    return this.formBuilder.group({
+      brand: [''],
+      model: [''],
+      year: ['', [ Validators.minLength(4), Validators.maxLength(4), IntegerNumberOnlyValidator ]],
+      vin: [''],
+      plate: [''],
+      insuranceNumber: [''],
+    });
+  }
 }
