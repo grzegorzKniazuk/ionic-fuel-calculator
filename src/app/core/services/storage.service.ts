@@ -14,17 +14,18 @@ export class StorageService {
 	public readonly refuelingHistoryData$: BehaviorSubject<RefuelingHistoryData[]> = new BehaviorSubject([]);
 	public readonly carData$: BehaviorSubject<CarData> = new BehaviorSubject(null);
 	private refuelingHistoryData: RefuelingHistoryData[] = [];
+	private elementIndex: number;
 
 	constructor(private storage: Storage,
 	            private toastService: ToastService) {
 	}
 
 	private get averageFuelConsumption(): number {
-		return (this.refuelingHistoryData[this.refuelingHistoryData.length - 1].amountOfFuel / this.refuelingHistoryData[this.refuelingHistoryData.length - 1].distance * 100);
+		return this.refuelingHistoryData[this.refuelingHistoryData.length - 1].amountOfFuel / this.refuelingHistoryData[this.refuelingHistoryData.length - 1].distance * 100;
 	}
 
 	public loadRefuelingHistoryData(): void {
-		this.storage.get('data').then((data: RefuelingHistoryData[]) => {
+		this.storage.get('refueling-history-data').then((data: RefuelingHistoryData[]) => {
 			if (data) {
 				this.refuelingHistoryData = data;
 				this.refuelingHistoryData$.next(data);
@@ -45,15 +46,22 @@ export class StorageService {
 	}
 
 	public deleteDataEntry(mileage: number): void {
-		this.modifyEntryArray(mileage);
-		this.storage.set('data', this.refuelingHistoryData);
+		this.refuelingHistoryData = this.refuelingHistoryData.filter((entry: RefuelingHistoryData) => entry.mileage !== mileage);
+		this.storage.set('refueling-history-data', this.refuelingHistoryData);
 		this.refuelingHistoryData$.next(this.refuelingHistoryData);
 		this.toastService.success(ToastMessages.deletedSuccessfully);
 	}
 
 	public modifyDataEntry(mileage: number, data: RefuelingHistoryData): void {
-		this.modifyEntryArray(mileage);
-		this.addEntry(data);
+		this.elementIndex = this.refuelingHistoryData.findIndex((entry: RefuelingHistoryData) => entry.mileage === mileage);
+		console.log(this.refuelingHistoryData);
+		for (const key of Object.keys(this.refuelingHistoryData[this.elementIndex])) {
+			this.refuelingHistoryData[this.elementIndex][key] = data[key];
+		}
+		console.log(this.refuelingHistoryData);
+		this.storage.set('refueling-history-data', this.refuelingHistoryData).then(() => {
+			this.refuelingHistoryData$.next(this.refuelingHistoryData);
+		});
 	}
 
 	public loadCarData(): void {
@@ -81,15 +89,11 @@ export class StorageService {
 
 	private addEntry(data: RefuelingHistoryData): void {
 		this.refuelingHistoryData.push(data);
-		this.storage.set('data', this.refuelingHistoryData).then(() => {
+		this.storage.set('refueling-history-data', this.refuelingHistoryData).then(() => {
 			this.loadRefuelingHistoryData();
 			this.toastService.success(ToastMessages.savedSuccessfully);
 		}).catch((error) => {
 			this.toastService.error(error);
 		});
-	}
-
-	private modifyEntryArray(mileage: number): void {
-		this.refuelingHistoryData = this.refuelingHistoryData.filter((entry: RefuelingHistoryData) => entry.mileage !== mileage);
 	}
 }

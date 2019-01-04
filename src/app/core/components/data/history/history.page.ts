@@ -2,7 +2,6 @@ import { ChangeDetectionStrategy, ChangeDetectorRef, Component, OnDestroy, OnIni
 import { RefuelingHistoryData } from '../../../interfaces/refueling-history-data';
 import { MatBottomSheet, MatDialog } from '@angular/material';
 import { NewEntryComponent } from './new-entry/new-entry.component';
-import { DialogComponentResponse } from '../../../enums/dialog-component-response.enum';
 import { AutoUnsubscribe } from 'ngx-auto-unsubscribe';
 import { StorageService } from '../../../services/storage.service';
 import { ConfirmModalComponent } from '../../../../shared/components/confirm-modal/confirm-modal.component';
@@ -38,20 +37,16 @@ export class HistoryPage implements OnInit, OnDestroy {
 	}
 
 	public openNewEntryModal(): void {
-		this.matDialog.open(NewEntryComponent).afterClosed().subscribe((response: DialogComponentResponse) => {
-			if (response === DialogComponentResponse.saved) {
-				this.changeDetectorRef.detectChanges();
-			}
+		this.matDialog.open(NewEntryComponent).afterClosed().subscribe(() => {
+			this.changeDetectorRef.detectChanges();
 		});
 	}
 
 	public openModifyEntryModal(data: RefuelingHistoryData): void {
 		this.matDialog.open(EditEntryComponent, {
 			data: data,
-		}).afterClosed().subscribe((response: string) => {
-			if (response === DialogComponentResponse.saved) {
-				this.changeDetectorRef.detectChanges();
-			}
+		}).afterClosed().subscribe(() => {
+			this.changeDetectorRef.detectChanges();
 		});
 	}
 

@@ -71,8 +71,13 @@ export class FormEntryComponent implements OnInit, OnDestroy {
 
 	private initFormData(): void {
 		if (this.entryData) {
-			console.log(this.entryData);
-			this.refuelingForm.setValue(this.entryData);
+			this.refuelingForm.setValue({
+				date: this.entryData.date,
+				mileage: this.entryData.mileage,
+				amountOfFuel: this.entryData.amountOfFuel,
+				fuelCostPerUnit: this.entryData.fuelCostPerUnit,
+				fuelCost: this.entryData.fuelCost,
+			});
 		}
 	}
 
