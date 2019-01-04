@@ -1,4 +1,4 @@
 export enum DialogComponentResponse {
-    saved = 'saved',
-    abort = 'abort',
+	saved = 'saved',
+	abort = 'abort',
 }

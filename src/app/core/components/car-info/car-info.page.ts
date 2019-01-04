@@ -8,42 +8,43 @@ import { DialogComponentResponse } from '../../enums/dialog-component-response.e
 
 @AutoUnsubscribe()
 @Component({
-  selector: 'app-car-info',
-  templateUrl: './car-info.page.html',
-  styleUrls: ['./car-info.page.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush,
+	selector: 'app-car-info',
+	templateUrl: './car-info.page.html',
+	styleUrls: [ './car-info.page.scss' ],
+	changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class CarInfoPage implements OnInit, OnDestroy {
 
-  public carData: CarData;
+	public carData: CarData;
 
-  constructor(private storageService: StorageService,
-              private matDialog: MatDialog,
-              private changeDetectorRef: ChangeDetectorRef) { }
+	constructor(private storageService: StorageService,
+	            private matDialog: MatDialog,
+	            private changeDetectorRef: ChangeDetectorRef) {
+	}
 
-  ngOnInit() {
-    this.storageService.loadCarData();
-    this.watchCarData();
-  }
+	ngOnInit() {
+		this.storageService.loadCarData();
+		this.watchCarData();
+	}
 
-  public ngOnDestroy(): void {
-  }
+	public ngOnDestroy(): void {
+	}
 
-  public updateCarData(): void {
-    this.matDialog.open(UpdateFormComponent, {
-      data: this.carData,
-    }).afterClosed().subscribe((response: DialogComponentResponse) => {
-      if (response === DialogComponentResponse.saved) {
-        this.storageService.loadCarData();
-        this.changeDetectorRef.detectChanges();
-      }
-    });
-  }
+	public updateCarData(): void {
+		this.matDialog.open(UpdateFormComponent, {
+			data: this.carData,
+		}).afterClosed().subscribe((response: DialogComponentResponse) => {
+			if (response === DialogComponentResponse.saved) {
+				this.storageService.loadCarData();
+				this.changeDetectorRef.detectChanges();
+			}
+		});
+	}
 
-  private watchCarData(): void {
-    this.storageService.carData$.subscribe((data: CarData) => {
-      this.carData = data;
-      this.changeDetectorRef.detectChanges();
-    });
-  }
+	private watchCarData(): void {
+		this.storageService.carData$.subscribe((data: CarData) => {
+			this.carData = data;
+			this.changeDetectorRef.detectChanges();
+		});
+	}
 }

@@ -1,41 +1,44 @@
-<form autocomplete="off" [formGroup]="fuelSimulationForm">
+<form [formGroup]="fuelSimulationForm" autocomplete="off">
     <div class="form-input">
         <mat-form-field [hideRequiredMarker]="false">
-            <input formControlName="refiledLiters"
+            <input [placeholder]="formPlaceholder.totalRefueledFuel"
+                   formControlName="refiledLiters"
                    matInput
-                   type="number"
                    required
-                   [placeholder]="formPlaceholder.totalRefueledFuel">
-            <mat-error *ngIf="fuelSimulationForm.get('refiledLiters').hasError('required')">{{ validatorPlaceholder.required }}</mat-error>
+                   type="number">
             <mat-error
-                *ngIf="fuelSimulationForm.get('refiledLiters').hasError('min')
+                    *ngIf="fuelSimulationForm.get('refiledLiters').hasError('required')">{{ validatorPlaceholder.required }}</mat-error>
+            <mat-error
+                    *ngIf="fuelSimulationForm.get('refiledLiters').hasError('min')
                 && !fuelSimulationForm.get('refiledLiters').hasError('required')">{{ validatorPlaceholder.minimumValue }}</mat-error>
             <mat-error
-                *ngIf="fuelSimulationForm.get('refiledLiters').hasError('floatNumbersOnly')
+                    *ngIf="fuelSimulationForm.get('refiledLiters').hasError('floatNumbersOnly')
                 && !fuelSimulationForm.get('refiledLiters').hasError('min')
                 && !fuelSimulationForm.get('refiledLiters').hasError('required')">{{ validatorPlaceholder.numbersOnly }}</mat-error>
         </mat-form-field>
         <mat-form-field [hideRequiredMarker]="false">
-            <input formControlName="traveledDistance"
+            <input [placeholder]="formPlaceholder.distanceTraveled"
+                   formControlName="traveledDistance"
                    matInput
-                   type="number"
                    required
-                   [placeholder]="formPlaceholder.distanceTraveled">
-            <mat-error *ngIf="fuelSimulationForm.get('traveledDistance').hasError('required')">{{ validatorPlaceholder.required }}</mat-error>
+                   type="number">
             <mat-error
-                *ngIf="fuelSimulationForm.get('traveledDistance').hasError('min')
+                    *ngIf="fuelSimulationForm.get('traveledDistance').hasError('required')">{{ validatorPlaceholder.required }}</mat-error>
+            <mat-error
+                    *ngIf="fuelSimulationForm.get('traveledDistance').hasError('min')
                 && !fuelSimulationForm.get('traveledDistance').hasError('required')">{{ validatorPlaceholder.minimumValue }}</mat-error>
             <mat-error
-                *ngIf="fuelSimulationForm.get('traveledDistance').hasError('floatNumbersOnly')
+                    *ngIf="fuelSimulationForm.get('traveledDistance').hasError('floatNumbersOnly')
                 && !fuelSimulationForm.get('traveledDistance').hasError('min')
                 && !fuelSimulationForm.get('traveledDistance').hasError('required')">{{ validatorPlaceholder.numbersOnly }}</mat-error>
         </mat-form-field>
         <mat-form-field>
-            <input formControlName="costPerUnit"
+            <input [placeholder]="formPlaceholder.fuelCostPerUnit"
+                   formControlName="costPerUnit"
                    matInput
-                   type="number"
-                   [placeholder]="formPlaceholder.fuelCostPerUnit">
-            <mat-error *ngIf="fuelSimulationForm.get('costPerUnit').hasError('min')">{{ validatorPlaceholder.minimumValue }}</mat-error>
+                   type="number">
+            <mat-error
+                    *ngIf="fuelSimulationForm.get('costPerUnit').hasError('min')">{{ validatorPlaceholder.minimumValue }}</mat-error>
             <mat-error *ngIf=" fuelSimulationForm.get('costPerUnit').hasError('floatNumbersOnly')
                                 && !fuelSimulationForm.get('costPerUnit').hasError('min')">{{ validatorPlaceholder.numbersOnly }}</mat-error>
         </mat-form-field>

@@ -14,65 +14,69 @@ import { RefuelingSortCriteria } from '../../../interfaces/refueling-sort-criter
 @AutoUnsubscribe()
 @Component({
 	selector: 'app-history',
-  templateUrl: './history.page.html',
-  styleUrls: ['./history.page.scss'],
+	templateUrl: './history.page.html',
+	styleUrls: [ './history.page.scss' ],
 	changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class HistoryPage implements OnInit, OnDestroy {
 
-  public refuelingHistoryData: RefuelingHistoryData[] = [];
-  public sortCriteria: RefuelingSortCriteria;
-  constructor(private matDialog: MatDialog,
-              private changeDetectorRef: ChangeDetectorRef,
-              private storageService: StorageService,
-              private matBottomSheet: MatBottomSheet) {}
+	public refuelingHistoryData: RefuelingHistoryData[] = [];
+	public sortCriteria: RefuelingSortCriteria;
 
-  ngOnInit() {
-  	this.storageService.loadRefuelingHistoryData();
-    this.watchHistoryDataChanges();
-  }
+	constructor(private matDialog: MatDialog,
+	            private changeDetectorRef: ChangeDetectorRef,
+	            private storageService: StorageService,
+	            private matBottomSheet: MatBottomSheet) {
+	}
 
-  public ngOnDestroy(): void {
-  }
+	ngOnInit() {
+		this.storageService.loadRefuelingHistoryData();
+		this.watchHistoryDataChanges();
+	}
 
-  private watchHistoryDataChanges(): void {
-    this.storageService.refuelingHistoryData$.subscribe((data: RefuelingHistoryData[]) => {
-      this.refuelingHistoryData = data;
-      this.changeDetectorRef.detectChanges();
-    });
-  }
+	public ngOnDestroy(): void {
+	}
 
-  public openNewEntryModal(): void {
-    this.matDialog.open(NewEntryComponent).afterClosed().subscribe((response: DialogComponentResponse) => {
-      if (response === DialogComponentResponse.saved) {
-	      this.changeDetectorRef.detectChanges();
-      }
-    });
-  }
+	public openNewEntryModal(): void {
+		this.matDialog.open(NewEntryComponent).afterClosed().subscribe((response: DialogComponentResponse) => {
+			if (response === DialogComponentResponse.saved) {
+				this.changeDetectorRef.detectChanges();
+			}
+		});
+	}
 
-  public openModifyEntryModal(data: RefuelingHistoryData): void {
-	  this.matDialog.open(EditEntryComponent, {
-	  	data: data,
-	  }).afterClosed().subscribe((response: string) => {
-		  if (response === DialogComponentResponse.saved) {
-			  this.changeDetectorRef.detectChanges();
-		  }
-	  });
-  }
+	public openModifyEntryModal(data: RefuelingHistoryData): void {
+		this.matDialog.open(EditEntryComponent, {
+			data: data,
+		}).afterClosed().subscribe((response: string) => {
+			if (response === DialogComponentResponse.saved) {
+				this.changeDetectorRef.detectChanges();
+			}
+		});
+	}
 
-  public openConfirmModal(mileage: number): void {
-  	this.matBottomSheet.open(ConfirmModalComponent).afterDismissed().subscribe((response: ConfirmResponseType) => {
-  		if (response === ConfirmResponseType.confirm) {
+	public openConfirmModal(mileage: number): void {
+		this.matBottomSheet.open(ConfirmModalComponent).afterDismissed().subscribe((response: ConfirmResponseType) => {
+			if (response === ConfirmResponseType.confirm) {
 				this.storageService.deleteDataEntry(mileage);
 				this.changeDetectorRef.detectChanges();
-		  }
-	  });
-  }
+			}
+		});
+	}
 
-  public openSortModal(): void {
+	public openSortModal(): void {
 		this.matDialog.open(SortModalComponent).afterClosed().subscribe((criteria: RefuelingSortCriteria) => {
 			this.sortCriteria = criteria;
 			this.changeDetectorRef.detectChanges();
 		});
-  }
+	}
+
+	private watchHistoryDataChanges(): void {
+		this.storageService.refuelingHistoryData$.subscribe((data: RefuelingHistoryData[]) => {
+			if (data) {
+				this.refuelingHistoryData = data;
+				this.changeDetectorRef.detectChanges();
+			}
+		});
+	}
 }

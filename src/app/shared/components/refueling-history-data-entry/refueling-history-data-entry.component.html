@@ -1,29 +1,36 @@
 <mat-card class="data-container">
-  <mat-card-header>
-    <mat-card-title><mat-icon>date_range</mat-icon> {{ data.date | date }}</mat-card-title>
-  </mat-card-header>
-  <mat-card-content class="card-content">
-    <div>
-      <p>Przebieg:</p>
-      <p *ngIf="data.distance">Pokonany dystans:</p>
-      <p>Ilość paliwa:</p>
-      <p>Kosz paliwa:</p>
-      <p>Cena 1l:</p>
-    </div>
-    <div>
-      <p><strong>{{ data.mileage }}</strong> km</p>
-      <p *ngIf="data.distance"><strong>{{ data.distance }}</strong> km</p>
-      <p><strong>{{ data.amountOfFuel }}</strong> l</p>
-      <p><strong>{{ data.fuelCost }}</strong> zł</p>
-      <p><strong>{{ data.fuelCostPerUnit }}</strong> zł</p>
-    </div>
-  </mat-card-content>
-  <mat-card-actions class="card-actions">
-    <button mat-raised-button
-            (click)="openModifyEntryModal()"
-            color="primary">edit</button>
-    <button mat-raised-button
-            (click)="openDeleteConfirmModal()"
-            color="warn">delete</button>
-  </mat-card-actions>
+    <mat-card-header>
+        <mat-card-title>
+            <mat-icon>date_range</mat-icon>
+            {{ data.date | date }}</mat-card-title>
+    </mat-card-header>
+    <mat-card-content class="card-content">
+        <div>
+            <p>Przebieg:</p>
+            <p *ngIf="data.distance">Pokonany dystans:</p>
+            <p *ngIf="data.averageFuelConsumption">Średnie spalanie:</p>
+            <p>Ilość paliwa:</p>
+            <p>Kosz paliwa:</p>
+            <p>Cena 1l:</p>
+        </div>
+        <div>
+            <p><strong>{{ data.mileage }}</strong> km</p>
+            <p *ngIf="data.distance"><strong>{{ data.distance }}</strong> km</p>
+            <p *ngIf="data.averageFuelConsumption"><strong>{{ data.averageFuelConsumption.toFixed(2) }}</strong> l/100km
+            </p>
+            <p><strong>{{ data.amountOfFuel }}</strong> l</p>
+            <p><strong>{{ data.fuelCost }}</strong> zł</p>
+            <p><strong>{{ data.fuelCostPerUnit }}</strong> zł</p>
+        </div>
+    </mat-card-content>
+    <mat-card-actions class="card-actions">
+        <button (click)="openModifyEntryModal()"
+                color="primary"
+                mat-raised-button>edit
+        </button>
+        <button (click)="openDeleteConfirmModal()"
+                color="warn"
+                mat-raised-button>delete
+        </button>
+    </mat-card-actions>
 </mat-card>

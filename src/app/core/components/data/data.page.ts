@@ -1,7 +1,8 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 
 @Component({
-  templateUrl: './data.page.html',
-  changeDetection: ChangeDetectionStrategy.OnPush,
+	templateUrl: './data.page.html',
+	changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class DataPage {}
+export class DataPage {
+}

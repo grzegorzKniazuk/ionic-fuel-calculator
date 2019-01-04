@@ -1,35 +1,36 @@
 <ion-header>
-  <ion-toolbar>
-    <mat-icon slot="start">directions_car</mat-icon>
-    <ion-title slot="start">Dane pojazdu</ion-title>
-  </ion-toolbar>
+    <ion-toolbar>
+        <mat-icon slot="start">directions_car</mat-icon>
+        <ion-title slot="start">Dane pojazdu</ion-title>
+    </ion-toolbar>
 </ion-header>
 <ion-content padding>
-  <div class="car-data-container">
-    <div class="camera">
-      <mat-icon>camera</mat-icon>
-      <p>Dodaj zdjęcie pojazdu</p>
+    <div class="car-data-container">
+        <div class="camera">
+            <mat-icon>camera</mat-icon>
+            <p>Dodaj zdjęcie pojazdu</p>
+        </div>
+        <div class="car-data">
+            <div class="data-label">
+                <p>Marka:</p>
+                <p>Model:</p>
+                <p>Rok produkcji:</p>
+                <p>Numer VIN:</p>
+                <p>Numer rejestracyjny:</p>
+                <p>Numer ubezpieczenia:</p>
+            </div>
+            <div>
+                <p><strong>{{ carData && carData.brand ? carData.brand : 'brak danych' }}</strong></p>
+                <p><strong>{{ carData && carData.model ? carData.model : 'brak danych' }}</strong></p>
+                <p><strong>{{ carData && carData.year ? carData.year : 'brak danych' }}</strong></p>
+                <p><strong>{{ carData && carData.vin ? carData.vin : 'brak danych' }}</strong></p>
+                <p><strong>{{ carData && carData.plate ? carData.plate : 'brak danych' }}</strong></p>
+                <p><strong>{{ carData && carData.insuranceNumber ? carData.insuranceNumber : 'brak danych' }}</strong>
+                </p>
+            </div>
+        </div>
+        <button class="update-car-button" (click)="updateCarData()" mat-mini-fab color="primary">
+            <mat-icon>edit</mat-icon>
+        </button>
     </div>
-    <div class="car-data">
-      <div class="data-label">
-        <p>Marka:</p>
-        <p>Model:</p>
-        <p>Rok produkcji:</p>
-        <p>Numer VIN:</p>
-        <p>Numer rejestracyjny:</p>
-        <p>Numer ubezpieczenia:</p>
-      </div>
-      <div>
-        <p><strong>{{ carData && carData.brand ? carData.brand : 'brak danych' }}</strong></p>
-        <p><strong>{{ carData && carData.model ? carData.model : 'brak danych' }}</strong></p>
-        <p><strong>{{ carData && carData.year ? carData.year : 'brak danych' }}</strong></p>
-        <p><strong>{{ carData && carData.vin ? carData.vin : 'brak danych' }}</strong></p>
-        <p><strong>{{ carData && carData.plate ? carData.plate : 'brak danych' }}</strong></p>
-        <p><strong>{{ carData && carData.insuranceNumber ? carData.insuranceNumber : 'brak danych' }}</strong></p>
-      </div>
-    </div>
-    <button class="update-car-button" (click)="updateCarData()" mat-mini-fab color="primary">
-      <mat-icon>edit</mat-icon>
-    </button>
-  </div>
 </ion-content>

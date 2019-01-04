@@ -1,22 +1,23 @@
 import { Injectable } from '@angular/core';
-import {MatSnackBar} from '@angular/material';
+import { MatSnackBar } from '@angular/material';
 
 @Injectable({
-  providedIn: 'root',
+	providedIn: 'root',
 })
 export class ToastService {
 
-  constructor(private matSnackBar: MatSnackBar) { }
+	constructor(private matSnackBar: MatSnackBar) {
+	}
 
-  public success(message: string): void {
-    this.matSnackBar.open(message, '', {
-      panelClass: 'toast-success'
-    });
-  }
+	public success(message: string): void {
+		this.matSnackBar.open(message, '', {
+			panelClass: 'toast-success',
+		});
+	}
 
-  public error(message: string): void {
-    this.matSnackBar.open(message, '', {
-      panelClass: 'toast-error'
-    });
-  }
+	public error(message: string): void {
+		this.matSnackBar.open(message, '', {
+			panelClass: 'toast-error',
+		});
+	}
 }

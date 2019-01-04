@@ -7,42 +7,42 @@ import { CalculatorModel } from '../../../models/calculator.model';
 
 @AutoUnsubscribe()
 @Component({
-  selector: 'app-cost',
-  templateUrl: './cost.page.html',
-  styleUrls: ['./cost.page.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush,
+	selector: 'app-cost',
+	templateUrl: './cost.page.html',
+	styleUrls: [ './cost.page.scss' ],
+	changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class CostPage extends CalculatorModel implements OnInit, OnDestroy {
 
-  public costSimulationForm: FormGroup;
-  public fuelConsumption: number;
-  public fuelCost: number;
+	public costSimulationForm: FormGroup;
+	public fuelConsumption: number;
+	public fuelCost: number;
 
-  constructor(private formService: FormService) {
-    super();
-  }
+	constructor(private formService: FormService) {
+		super();
+	}
 
-  ngOnInit() {
-    this.buildForm();
-    this.watchForm();
-  }
+	ngOnInit() {
+		this.buildForm();
+		this.watchForm();
+	}
 
-  ngOnDestroy(): void {
-  }
+	ngOnDestroy(): void {
+	}
 
-  private buildForm(): void {
-    this.costSimulationForm = this.formService.costSimulationForm;
-  }
+	private buildForm(): void {
+		this.costSimulationForm = this.formService.costSimulationForm;
+	}
 
-  private watchForm(): void {
-    this.costSimulationForm.valueChanges.subscribe((data: CostSimulationData) => {
-      if (this.costSimulationForm.valid) {
-        this.fuelConsumption = parseFloat(data.distanceToGo) / 100 * parseFloat(data.averageFuelConsumption);
-        this.fuelCost = this.fuelConsumption * parseFloat(data.costPerUnit);
-      } else {
-        this.fuelConsumption = 0;
-        this.fuelCost = 0;
-      }
-    });
-  }
+	private watchForm(): void {
+		this.costSimulationForm.valueChanges.subscribe((data: CostSimulationData) => {
+			if (this.costSimulationForm.valid) {
+				this.fuelConsumption = parseFloat(data.distanceToGo) / 100 * parseFloat(data.averageFuelConsumption);
+				this.fuelCost = this.fuelConsumption * parseFloat(data.costPerUnit);
+			} else {
+				this.fuelConsumption = 0;
+				this.fuelCost = 0;
+			}
+		});
+	}
 }

@@ -1,26 +1,27 @@
-<form autocomplete="off" [formGroup]="costSimulationForm">
+<form [formGroup]="costSimulationForm" autocomplete="off">
     <div class="form-input">
         <mat-form-field [hideRequiredMarker]="false">
-            <input formControlName="averageFuelConsumption"
+            <input [placeholder]="formPlaceholder.averageFuelConsumption"
+                   formControlName="averageFuelConsumption"
                    matInput
-                   type="number"
                    required
-                   [placeholder]="formPlaceholder.averageFuelConsumption">
-            <app-validation-feedback [control]="costSimulationForm.get('averageFuelConsumption')"></app-validation-feedback>
-            <!--<mat-error *ngIf="costSimulationForm.get('averageFuelConsumption').hasError('required')">{{ validatorPlaceholder.required }}</mat-error>
+                   type="number">
+            <mat-error
+                    *ngIf="costSimulationForm.get('averageFuelConsumption').hasError('required')">{{ validatorPlaceholder.required }}</mat-error>
             <mat-error *ngIf="costSimulationForm.get('averageFuelConsumption').hasError('min')
                    && !costSimulationForm.get('averageFuelConsumption').hasError('required')">{{ validatorPlaceholder.minimumValue }}</mat-error>
             <mat-error *ngIf="costSimulationForm.get('averageFuelConsumption').hasError('floatNumbersOnly')
                    && !costSimulationForm.get('averageFuelConsumption').hasError('min')
-                   && !costSimulationForm.get('averageFuelConsumption').hasError('required')">{{ validatorPlaceholder.numbersOnly }}</mat-error>-->
+                   && !costSimulationForm.get('averageFuelConsumption').hasError('required')">{{ validatorPlaceholder.numbersOnly }}</mat-error>
         </mat-form-field>
         <mat-form-field [hideRequiredMarker]="false">
-            <input formControlName="distanceToGo"
+            <input [placeholder]="formPlaceholder.distanceToGo"
+                   formControlName="distanceToGo"
                    matInput
-                   type="number"
                    required
-                   [placeholder]="formPlaceholder.distanceToGo">
-            <mat-error *ngIf="costSimulationForm.get('distanceToGo').hasError('required')">{{ validatorPlaceholder.required }}</mat-error>
+                   type="number">
+            <mat-error
+                    *ngIf="costSimulationForm.get('distanceToGo').hasError('required')">{{ validatorPlaceholder.required }}</mat-error>
             <mat-error *ngIf="costSimulationForm.get('distanceToGo').hasError('min')
                    && !costSimulationForm.get('distanceToGo').hasError('required')">{{ validatorPlaceholder.minimumValue }}</mat-error>
             <mat-error *ngIf="costSimulationForm.get('distanceToGo').hasError('floatNumbersOnly')
@@ -28,12 +29,13 @@
                    && !costSimulationForm.get('distanceToGo').hasError('required')">{{ validatorPlaceholder.numbersOnly }}</mat-error>
         </mat-form-field>
         <mat-form-field [hideRequiredMarker]="false">
-            <input formControlName="costPerUnit"
+            <input [placeholder]="formPlaceholder.fuelCostPerUnit"
+                   formControlName="costPerUnit"
                    matInput
-                   type="number"
                    required
-                   [placeholder]="formPlaceholder.fuelCostPerUnit">
-            <mat-error *ngIf="costSimulationForm.get('costPerUnit').hasError('required')">{{ validatorPlaceholder.required }}</mat-error>
+                   type="number">
+            <mat-error
+                    *ngIf="costSimulationForm.get('costPerUnit').hasError('required')">{{ validatorPlaceholder.required }}</mat-error>
             <mat-error *ngIf="costSimulationForm.get('costPerUnit').hasError('min')
                    && !costSimulationForm.get('costPerUnit').hasError('required')">{{ validatorPlaceholder.minimumValue }}</mat-error>
             <mat-error *ngIf="costSimulationForm.get('costPerUnit').hasError('floatNumbersOnly')

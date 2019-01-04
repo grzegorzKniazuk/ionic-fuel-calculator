@@ -1,5 +1,5 @@
 export interface RangeSimulationData {
-    averageFuelConsumption: string;
-    fuelCost: string;
-    costPerUnit: string;
+	averageFuelConsumption: string;
+	fuelCost: string;
+	costPerUnit: string;
 }

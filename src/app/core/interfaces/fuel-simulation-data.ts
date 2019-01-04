@@ -1,5 +1,5 @@
 export interface FuelSimulationData {
-    refiledLiters: string;
-    traveledDistance: string;
-    costPerUnit: string;
+	refiledLiters: string;
+	traveledDistance: string;
+	costPerUnit: string;
 }

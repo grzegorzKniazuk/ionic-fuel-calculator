@@ -1,3 +1,0 @@
-<mat-error *ngIf="control.hasError('required')">{{ validatorPlaceholder.required }}</mat-error>
-<mat-error *ngIf="control.hasError('min') && !control.hasError('required')">{{ validatorPlaceholder.minimumValue }}</mat-error>
-<mat-error *ngIf="control.hasError('floatNumbersOnly') && !control.hasError('min') && !control.hasError('required')">{{ validatorPlaceholder.numbersOnly }}</mat-error>

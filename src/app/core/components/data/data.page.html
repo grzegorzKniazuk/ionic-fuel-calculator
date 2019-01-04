@@ -1,26 +1,28 @@
 <ion-header>
-  <ion-toolbar>
-    <mat-icon slot="start">history</mat-icon>
-    <ion-title slot="start">Historia tankowań i napraw</ion-title>
-  </ion-toolbar>
+    <ion-toolbar>
+        <mat-icon slot="start">history</mat-icon>
+        <ion-title slot="start">Historia tankowań i napraw</ion-title>
+    </ion-toolbar>
 </ion-header>
 <ion-content padding>
-  <mat-tab-group mat-align-tabs="center">
-    <mat-tab>
-      <ng-template mat-tab-label>
-        <mat-icon>local_gas_station</mat-icon>Tankowania
-      </ng-template>
-      <ng-template matTabContent>
-        <app-history></app-history>
-      </ng-template>
-    </mat-tab>
-    <mat-tab>
-      <ng-template mat-tab-label>
-        <mat-icon>build</mat-icon>Naprawy
-      </ng-template>
-      <ng-template matTabContent>
+    <mat-tab-group mat-align-tabs="center">
+        <mat-tab>
+            <ng-template mat-tab-label>
+                <mat-icon>local_gas_station</mat-icon>
+                Tankowania
+            </ng-template>
+            <ng-template matTabContent>
+                <app-history></app-history>
+            </ng-template>
+        </mat-tab>
+        <mat-tab>
+            <ng-template mat-tab-label>
+                <mat-icon>build</mat-icon>
+                Naprawy
+            </ng-template>
+            <ng-template matTabContent>
 
-      </ng-template>
-    </mat-tab>
-  </mat-tab-group>
+            </ng-template>
+        </mat-tab>
+    </mat-tab-group>
 </ion-content>

@@ -1,75 +1,88 @@
 <app-form-header *ngIf="!entryData">Nowe tankowanie</app-form-header>
 <app-form-header *ngIf="entryData">Edycja tankowania</app-form-header>
 <mat-dialog-content align="center">
-  <form [formGroup]="refuelingForm">
-    <mat-form-field>
-      <input formControlName="date" matInput [max]="today" [matDatepicker]="picker" placeholder="Data tankowania">
-      <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-      <mat-datepicker touchUi #picker></mat-datepicker>
-      <mat-error *ngIf="refuelingForm.get('date').hasError('required') && !refuelingForm.get('date').hasError('matDatepickerParse')">This field is required</mat-error>
-      <mat-error *ngIf="refuelingForm.get('date').hasError('matDatepickerParse')">Invalid date format</mat-error>
-    </mat-form-field>
-    <mat-form-field [hideRequiredMarker]="false">
-      <input formControlName="mileage"
-             matInput
-             type="number"
-             required
-             placeholder="Przebieg">
-      <mat-error *ngIf="refuelingForm.get('mileage').hasError('required')">This field is required</mat-error>
-      <mat-error *ngIf="refuelingForm.get('mileage').hasError('min')
-                   && !refuelingForm.get('mileage').hasError('required')">The minimum value is 1</mat-error>
-      <mat-error *ngIf="refuelingForm.get('mileage').hasError('integerNumbersOnly')
+    <form [formGroup]="refuelingForm">
+        <mat-form-field>
+            <input formControlName="date" matInput [max]="today" [matDatepicker]="picker" placeholder="Data tankowania">
+            <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+            <mat-datepicker touchUi #picker></mat-datepicker>
+            <mat-error
+                    *ngIf="refuelingForm.get('date').hasError('required') && !refuelingForm.get('date').hasError('matDatepickerParse')">
+                This field is required
+            </mat-error>
+            <mat-error *ngIf="refuelingForm.get('date').hasError('matDatepickerParse')">Invalid date format</mat-error>
+        </mat-form-field>
+        <mat-form-field [hideRequiredMarker]="false">
+            <input formControlName="mileage"
+                   matInput
+                   type="number"
+                   required
+                   placeholder="Przebieg">
+            <mat-error *ngIf="refuelingForm.get('mileage').hasError('required')">This field is required</mat-error>
+            <mat-error *ngIf="refuelingForm.get('mileage').hasError('min')
+                   && !refuelingForm.get('mileage').hasError('required')">The minimum value is 1
+            </mat-error>
+            <mat-error *ngIf="refuelingForm.get('mileage').hasError('integerNumbersOnly')
                    && !refuelingForm.get('mileage').hasError('min')
-                   && !refuelingForm.get('mileage').hasError('required')">Only numbers are allowed</mat-error>
-    </mat-form-field>
-    <mat-form-field [hideRequiredMarker]="false">
-      <input formControlName="amountOfFuel"
-             matInput
-             type="number"
-             required
-             appCommaToDot
-             placeholder="Ilość paliwa">
-      <mat-error *ngIf="refuelingForm.get('amountOfFuel').hasError('required')">This field is required</mat-error>
-      <mat-error *ngIf="refuelingForm.get('amountOfFuel').hasError('min')
-                   && !refuelingForm.get('amountOfFuel').hasError('required')">The minimum value is 1</mat-error>
-      <mat-error *ngIf="refuelingForm.get('amountOfFuel').hasError('floatNumbersOnly')
+                   && !refuelingForm.get('mileage').hasError('required')">Only numbers are allowed
+            </mat-error>
+        </mat-form-field>
+        <mat-form-field [hideRequiredMarker]="false">
+            <input formControlName="amountOfFuel"
+                   matInput
+                   type="number"
+                   required
+                   appCommaToDot
+                   placeholder="Ilość paliwa">
+            <mat-error *ngIf="refuelingForm.get('amountOfFuel').hasError('required')">This field is required</mat-error>
+            <mat-error *ngIf="refuelingForm.get('amountOfFuel').hasError('min')
+                   && !refuelingForm.get('amountOfFuel').hasError('required')">The minimum value is 1
+            </mat-error>
+            <mat-error *ngIf="refuelingForm.get('amountOfFuel').hasError('floatNumbersOnly')
                    && !refuelingForm.get('amountOfFuel').hasError('min')
-                   && !refuelingForm.get('amountOfFuel').hasError('required')">Only numbers are allowed</mat-error>
-    </mat-form-field>
-    <mat-form-field [hideRequiredMarker]="false">
-      <input formControlName="fuelCostPerUnit"
-             matInput
-             type="number"
-             required
-             appCommaToDot
-             placeholder="Koszt 1 litra">
-      <mat-error *ngIf="refuelingForm.get('fuelCostPerUnit').hasError('required')">This field is required</mat-error>
-      <mat-error *ngIf="refuelingForm.get('fuelCostPerUnit').hasError('min')
-                   && !refuelingForm.get('fuelCostPerUnit').hasError('required')">The minimum value is 1</mat-error>
-      <mat-error *ngIf="refuelingForm.get('fuelCostPerUnit').hasError('floatNumbersOnly')
+                   && !refuelingForm.get('amountOfFuel').hasError('required')">Only numbers are allowed
+            </mat-error>
+        </mat-form-field>
+        <mat-form-field [hideRequiredMarker]="false">
+            <input formControlName="fuelCostPerUnit"
+                   matInput
+                   type="number"
+                   required
+                   appCommaToDot
+                   placeholder="Koszt 1 litra">
+            <mat-error *ngIf="refuelingForm.get('fuelCostPerUnit').hasError('required')">This field is required
+            </mat-error>
+            <mat-error *ngIf="refuelingForm.get('fuelCostPerUnit').hasError('min')
+                   && !refuelingForm.get('fuelCostPerUnit').hasError('required')">The minimum value is 1
+            </mat-error>
+            <mat-error *ngIf="refuelingForm.get('fuelCostPerUnit').hasError('floatNumbersOnly')
                    && !refuelingForm.get('fuelCostPerUnit').hasError('min')
-                   && !refuelingForm.get('fuelCostPerUnit').hasError('required')">Only numbers are allowed</mat-error>
-    </mat-form-field>
-    <mat-form-field [hideRequiredMarker]="false">
-      <input formControlName="fuelCost"
-             matInput
-             type="number"
-             required
-             appCommaToDot
-             placeholder="Łączny koszt paliwa">
-      <mat-error *ngIf="refuelingForm.get('fuelCost').hasError('required')">This field is required</mat-error>
-      <mat-error *ngIf="refuelingForm.get('fuelCost').hasError('min')
-                   && !refuelingForm.get('fuelCost').hasError('required')">The minimum value is 1</mat-error>
-      <mat-error *ngIf="refuelingForm.get('fuelCost').hasError('floatNumbersOnly')
+                   && !refuelingForm.get('fuelCostPerUnit').hasError('required')">Only numbers are allowed
+            </mat-error>
+        </mat-form-field>
+        <mat-form-field [hideRequiredMarker]="false">
+            <input formControlName="fuelCost"
+                   matInput
+                   type="number"
+                   required
+                   appCommaToDot
+                   placeholder="Łączny koszt paliwa">
+            <mat-error *ngIf="refuelingForm.get('fuelCost').hasError('required')">This field is required</mat-error>
+            <mat-error *ngIf="refuelingForm.get('fuelCost').hasError('min')
+                   && !refuelingForm.get('fuelCost').hasError('required')">The minimum value is 1
+            </mat-error>
+            <mat-error *ngIf="refuelingForm.get('fuelCost').hasError('floatNumbersOnly')
                    && !refuelingForm.get('fuelCost').hasError('min')
-                   && !refuelingForm.get('fuelCost').hasError('required')">Only numbers are allowed</mat-error>
-    </mat-form-field>
-  </form>
+                   && !refuelingForm.get('fuelCost').hasError('required')">Only numbers are allowed
+            </mat-error>
+        </mat-form-field>
+    </form>
 </mat-dialog-content>
 <mat-dialog-actions align="center">
-  <button type="submit"
-          [disabled]="refuelingForm.invalid"
-          (click)="saveEntry()"
-          mat-raised-button color="primary">Zapisz</button>
-  <button type="button" mat-raised-button mat-dialog-close color="warn">Anuluj</button>
+    <button type="submit"
+            [disabled]="refuelingForm.invalid"
+            (click)="saveEntry()"
+            mat-raised-button color="primary">Zapisz
+    </button>
+    <button type="button" mat-raised-button mat-dialog-close color="warn">Anuluj</button>
 </mat-dialog-actions>

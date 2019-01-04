@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { Routes, RouterModule } from '@angular/router';
+import { RouterModule, Routes } from '@angular/router';
 
 import { IonicModule } from '@ionic/angular';
 
@@ -11,28 +11,29 @@ import { UpdateFormComponent } from './update-form/update-form.component';
 import { SharedModule } from '../../../shared/shared.module';
 
 const routes: Routes = [
-  {
-    path: '',
-    component: CarInfoPage,
-  }
+	{
+		path: '',
+		component: CarInfoPage,
+	},
 ];
 
 @NgModule({
-  imports: [
-      CommonModule,
-      FormsModule,
-      ReactiveFormsModule,
-      IonicModule,
-      MaterialModule,
-      SharedModule,
-      RouterModule.forChild(routes),
-  ],
-  declarations: [
-      CarInfoPage,
-      UpdateFormComponent,
-  ],
-  entryComponents: [
-      UpdateFormComponent,
-  ],
+	imports: [
+		CommonModule,
+		FormsModule,
+		ReactiveFormsModule,
+		IonicModule,
+		MaterialModule,
+		SharedModule,
+		RouterModule.forChild(routes),
+	],
+	declarations: [
+		CarInfoPage,
+		UpdateFormComponent,
+	],
+	entryComponents: [
+		UpdateFormComponent,
+	],
 })
-export class CarInfoPageModule {}
+export class CarInfoPageModule {
+}

@@ -1,4 +1,4 @@
 export enum ToastMessages {
-    savedSuccessfully = 'Zapisano pomyślnie',
-    deletedSuccessfully = 'Usunięto pomyślnie',
+	savedSuccessfully = 'Zapisano pomyślnie',
+	deletedSuccessfully = 'Usunięto pomyślnie',
 }

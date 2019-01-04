@@ -7,42 +7,42 @@ import { CalculatorModel } from '../../../models/calculator.model';
 
 @AutoUnsubscribe()
 @Component({
-  selector: 'app-range',
-  templateUrl: './range.page.html',
-  styleUrls: ['./range.page.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush,
+	selector: 'app-range',
+	templateUrl: './range.page.html',
+	styleUrls: [ './range.page.scss' ],
+	changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class RangePage extends CalculatorModel implements OnInit, OnDestroy {
 
-  public rangeSimulationForm: FormGroup;
-  public amountOfFuel: number;
-  public range: number;
+	public rangeSimulationForm: FormGroup;
+	public amountOfFuel: number;
+	public range: number;
 
-  constructor(private formService: FormService) {
-    super();
-  }
+	constructor(private formService: FormService) {
+		super();
+	}
 
-  ngOnInit() {
-    this.buildForm();
-    this.watchForm();
-  }
+	ngOnInit() {
+		this.buildForm();
+		this.watchForm();
+	}
 
-  ngOnDestroy(): void {
-  }
+	ngOnDestroy(): void {
+	}
 
-  private buildForm(): void {
-    this.rangeSimulationForm = this.formService.rangeSimulationForm;
-  }
+	private buildForm(): void {
+		this.rangeSimulationForm = this.formService.rangeSimulationForm;
+	}
 
-  private watchForm(): void {
-    this.rangeSimulationForm.valueChanges.subscribe((data: RangeSimulationData) => {
-      if (this.rangeSimulationForm.valid) {
-        this.amountOfFuel = parseFloat(data.fuelCost) / parseFloat(data.costPerUnit);
-        this.range = parseFloat(data.fuelCost) / parseFloat(data.costPerUnit) * 100 / parseFloat(data.averageFuelConsumption);
-      } else {
-        this.amountOfFuel = 0;
-        this.range = 0;
-      }
-    });
-  }
+	private watchForm(): void {
+		this.rangeSimulationForm.valueChanges.subscribe((data: RangeSimulationData) => {
+			if (this.rangeSimulationForm.valid) {
+				this.amountOfFuel = parseFloat(data.fuelCost) / parseFloat(data.costPerUnit);
+				this.range = parseFloat(data.fuelCost) / parseFloat(data.costPerUnit) * 100 / parseFloat(data.averageFuelConsumption);
+			} else {
+				this.amountOfFuel = 0;
+				this.range = 0;
+			}
+		});
+	}
 }

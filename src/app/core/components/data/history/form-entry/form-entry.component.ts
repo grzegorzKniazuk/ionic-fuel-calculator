@@ -11,78 +11,78 @@ import { RefuelingHistoryData } from '../../../../interfaces/refueling-history-d
 
 @AutoUnsubscribe()
 @Component({
-  selector: 'app-form-entry',
-  templateUrl: './form-entry.component.html',
-  styleUrls: [ './form-entry.component.scss' ],
-  changeDetection: ChangeDetectionStrategy.OnPush,
+	selector: 'app-form-entry',
+	templateUrl: './form-entry.component.html',
+	styleUrls: [ './form-entry.component.scss' ],
+	changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class FormEntryComponent implements OnInit, OnDestroy {
 
-  public today: Date;
-  public refuelingForm: FormGroup;
-  @Input() public entryData?: RefuelingHistoryData;
+	public today: Date;
+	public refuelingForm: FormGroup;
+	@Input() public entryData?: RefuelingHistoryData;
 
-  constructor(private matDialogRef: MatDialogRef<FormEntryComponent>,
-              public storageService: StorageService,
-              private formService: FormService) {
-  }
+	constructor(private matDialogRef: MatDialogRef<FormEntryComponent>,
+	            public storageService: StorageService,
+	            private formService: FormService) {
+	}
 
-  ngOnInit() {
-    this.initDate();
-    this.buildForm();
-    this.initFormData();
-    this.watchTotalCost();
-  }
+	private get amountOfFuelValue(): Observable<string> {
+		return this.refuelingForm.get('amountOfFuel').valueChanges.pipe(map((value: string) => {
+			return value;
+		}));
+	}
 
-  ngOnDestroy(): void {
-  }
+	private get fuelCostPerUnitValue(): Observable<string> {
+		return this.refuelingForm.get('fuelCostPerUnit').valueChanges.pipe(map((value: string) => {
+			return value;
+		}));
+	}
 
-  private initDate(): void {
-    const year = new Date().getFullYear();
-    const month = new Date().getMonth();
-    const day = new Date().getDate();
-    this.today = new Date(year, month, day);
-  }
+	ngOnInit() {
+		this.initDate();
+		this.buildForm();
+		this.initFormData();
+		this.watchTotalCost();
+	}
 
-  private buildForm(): void {
-    this.refuelingForm = this.formService.refuelingForm;
-  }
+	ngOnDestroy(): void {
+	}
 
-  private initFormData(): void {
-    if (this.entryData) {
-      this.refuelingForm.setValue(this.entryData);
-    }
-  }
+	public saveEntry(): void {
+		if (this.refuelingForm.valid && !this.entryData) {
+			this.storageService.saveNewRefuelingDataEntry(this.refuelingForm.value);
+		} else if (this.refuelingForm.valid && this.entryData && this.entryData.mileage) {
+			this.storageService.modifyDataEntry(this.entryData.mileage, this.refuelingForm.value);
+		}
+		this.matDialogRef.close(DialogComponentResponse.saved);
+	}
 
-  private get amountOfFuelValue(): Observable<string> {
-    return this.refuelingForm.get('amountOfFuel').valueChanges.pipe(map((value: string) => {
-      return value;
-    }));
-  }
+	private initDate(): void {
+		const year = new Date().getFullYear();
+		const month = new Date().getMonth();
+		const day = new Date().getDate();
+		this.today = new Date(year, month, day);
+	}
 
-  private get fuelCostPerUnitValue(): Observable<string> {
-    return this.refuelingForm.get('fuelCostPerUnit').valueChanges.pipe(map((value: string) => {
-      return value;
-    }));
-  }
+	private buildForm(): void {
+		this.refuelingForm = this.formService.refuelingForm;
+	}
 
-  private watchTotalCost(): void {
-    combineLatest(this.amountOfFuelValue, this.fuelCostPerUnitValue)
-        .pipe(filter((values: [ string, string ]) => {
-          return !isNaN(parseFloat(values[0])) && !isNaN(parseFloat(values[1]));
-        }))
-        .subscribe((values: [ string, string ]) => {
-          this.refuelingForm.get('fuelCost').setValue((parseFloat(values[0]) * parseFloat(values[1])).toFixed(2));
-    });
-  }
+	private initFormData(): void {
+		if (this.entryData) {
+			console.log(this.entryData);
+			this.refuelingForm.setValue(this.entryData);
+		}
+	}
 
-  public saveEntry(): void {
-    if (this.refuelingForm.valid && !this.entryData) {
-      this.storageService.saveNewRefuelingDataEntry(this.refuelingForm.value);
-      this.matDialogRef.close(DialogComponentResponse.saved);
-    } else if (this.refuelingForm.valid && this.entryData) {
-      this.storageService.modifyDataEntry(this.entryData.mileage, this.refuelingForm.value);
-      this.matDialogRef.close(DialogComponentResponse.saved);
-    }
-  }
+	private watchTotalCost(): void {
+		combineLatest(this.amountOfFuelValue, this.fuelCostPerUnitValue)
+		.pipe(filter((values: [ string, string ]) => {
+			return !isNaN(parseFloat(values[0])) && !isNaN(parseFloat(values[1]));
+		}))
+		.subscribe((values: [ string, string ]) => {
+			this.refuelingForm.get('fuelCost').setValue((parseFloat(values[0]) * parseFloat(values[1])).toFixed(2));
+		});
+	}
 }
