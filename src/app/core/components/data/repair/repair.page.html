@@ -1,0 +1,17 @@
+<app-no-data *ngIf="!repairHistoryData.length"></app-no-data>
+<div class="repair-data">
+  <app-refueling-history-data-entry *ngFor="let data of repairHistoryData | historySort: sortCriteria"
+                                    [data]="data"
+                                    (openModifyModal$)="openModifyEntryModal(data)"
+                                    (openConfirmModal$)="openConfirmModal(data.mileage)"></app-refueling-history-data-entry>
+</div>
+<button (click)="openSortModal()"
+        class="sort-modal-button"
+        color="accent" mat-mini-fab>
+  <mat-icon>sort</mat-icon>
+</button>
+<button class="new-repair-history-entry-button"
+        (click)="openNewEntryModal()"
+        mat-mini-fab color="primary">
+  <mat-icon>add</mat-icon>
+</button>

@@ -5,7 +5,6 @@ import { RefuelingHistoryData } from '../../../../interfaces/refueling-history-d
 @Component({
 	selector: 'app-edit-entry',
 	templateUrl: './edit-entry.component.html',
-	styleUrls: [ './edit-entry.component.scss' ],
 	changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class EditEntryComponent {

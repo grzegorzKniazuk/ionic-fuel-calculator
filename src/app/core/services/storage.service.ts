@@ -67,9 +67,9 @@ export class StorageService {
 	public modifyDataEntry(mileage: number, data: RefuelingHistoryData): void {
 		this.elementIndex = this.getElementIndex(mileage);
 		for (const key of Object.keys(this.refuelingHistoryData[this.elementIndex])) {
-			if (key === 'distance' && this.refuelingHistoryData[this.elementIndex][key]) {
+			if (key === 'distance' && this.refuelingHistoryData[this.elementIndex + 1]) {
 				this.refuelingHistoryData[this.elementIndex][key] = this.refuelingHistoryData[this.elementIndex + 1].mileage - data.mileage;
-			} else if (key === 'averageFuelConsumption' && this.refuelingHistoryData[this.elementIndex][key]) {
+			} else if (key === 'averageFuelConsumption' && this.refuelingHistoryData[this.elementIndex + 1]) {
 				this.refuelingHistoryData[this.elementIndex][key] = this.refuelingHistoryData[this.elementIndex + 1].amountOfFuel / this.refuelingHistoryData[this.elementIndex + 1].distance * 100;
 			} else if (key === 'fuelCost') {
 				this.refuelingHistoryData[this.elementIndex][key] = parseFloat((data.amountOfFuel * data.fuelCostPerUnit).toFixed(2));

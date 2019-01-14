@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, ChangeDetectorRef, Component, OnDestroy, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component, OnDestroy, OnInit, ViewRef } from '@angular/core';
 import { RefuelingHistoryData } from '../../../interfaces/refueling-history-data';
 import { MatBottomSheet, MatDialog } from '@angular/material';
 import { NewEntryComponent } from './new-entry/new-entry.component';
@@ -70,7 +70,8 @@ export class HistoryPage implements OnInit, OnDestroy {
 		this.storageService.refuelingHistoryData$.subscribe((data: RefuelingHistoryData[]) => {
 			if (data) {
 				this.refuelingHistoryData = data;
-				this.changeDetectorRef.detectChanges();
+				if (!(this.changeDetectorRef as ViewRef).destroyed) {
+					this.changeDetectorRef.detectChanges();				}
 			}
 		});
 	}

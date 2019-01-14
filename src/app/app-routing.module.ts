@@ -7,7 +7,6 @@ const routes: Routes = [
 	{ path: 'about', loadChildren: './core/components/about/about.module#AboutPageModule' },
 	{ path: 'data', loadChildren: './core/components/data/data.module#DataPageModule' },
 	{ path: 'car-info', loadChildren: './core/components/car-info/car-info.module#CarInfoPageModule' },
-
 ];
 
 @NgModule({
