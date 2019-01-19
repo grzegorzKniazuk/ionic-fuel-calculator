@@ -1,3 +1,43 @@
-<p>
-  form-repair-entry works!
-</p>
+<app-form-header *ngIf="!entryData">Nowy wpis</app-form-header>
+<app-form-header *ngIf="entryData">Edycja wpisu</app-form-header>
+<mat-dialog-content align="center">
+  <form [formGroup]="repairForm">
+    <mat-form-field>
+      <input formControlName="date" matInput [max]="today" [matDatepicker]="picker" placeholder="Data wykonania naprawy">
+      <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+      <mat-datepicker touchUi #picker></mat-datepicker>
+      <mat-error
+              *ngIf="repairForm.get('date').hasError('required') && !repairForm.get('date').hasError('matDatepickerParse')">
+        This field is required
+      </mat-error>
+      <mat-error *ngIf="repairForm.get('date').hasError('matDatepickerParse')">Invalid date format</mat-error>
+    </mat-form-field>
+    <mat-form-field [hideRequiredMarker]="false">
+      <textarea formControlName="description" matInput required placeholder="Krótki opis"></textarea>
+      <mat-error *ngIf="repairForm.get('description').hasError('required')">This field is required</mat-error>
+    </mat-form-field>
+    <mat-form-field [hideRequiredMarker]="false">
+      <input formControlName="price"
+             matInput
+             type="number"
+             required
+             placeholder="Koszt">
+      <mat-error *ngIf="repairForm.get('price').hasError('required')">This field is required</mat-error>
+      <mat-error *ngIf="repairForm.get('price').hasError('min')
+                   && !repairForm.get('price').hasError('required')">The minimum value is 1
+      </mat-error>
+      <mat-error *ngIf="repairForm.get('price').hasError('floatNumbersOnly')
+                   && !repairForm.get('price').hasError('min')
+                   && !repairForm.get('price').hasError('required')">Only numbers are allowed
+      </mat-error>
+    </mat-form-field>
+  </form>
+</mat-dialog-content>
+<mat-dialog-actions align="center">
+  <button type="submit"
+          [disabled]="repairForm.invalid"
+          (click)="saveEntry()"
+          mat-raised-button color="primary">Zapisz
+  </button>
+  <button type="button" mat-raised-button mat-dialog-close color="warn">Anuluj</button>
+</mat-dialog-actions>

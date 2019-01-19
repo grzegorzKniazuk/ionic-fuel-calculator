@@ -14,7 +14,6 @@ import { RefuelingSortCriteria } from '../../../interfaces/refueling-sort-criter
 @Component({
 	selector: 'app-history',
 	templateUrl: './history.page.html',
-	styleUrls: [ './history.page.scss' ],
 	changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class HistoryPage implements OnInit, OnDestroy {
@@ -53,7 +52,7 @@ export class HistoryPage implements OnInit, OnDestroy {
 	public openConfirmModal(mileage: number): void {
 		this.matBottomSheet.open(ConfirmModalComponent).afterDismissed().subscribe((response: ConfirmResponseType) => {
 			if (response === ConfirmResponseType.confirm) {
-				this.storageService.deleteDataEntry(mileage);
+				this.storageService.deleteRefuelingDataEntry(mileage);
 				this.changeDetectorRef.detectChanges();
 			}
 		});
@@ -71,7 +70,8 @@ export class HistoryPage implements OnInit, OnDestroy {
 			if (data) {
 				this.refuelingHistoryData = data;
 				if (!(this.changeDetectorRef as ViewRef).destroyed) {
-					this.changeDetectorRef.detectChanges();				}
+					this.changeDetectorRef.detectChanges();
+				}
 			}
 		});
 	}

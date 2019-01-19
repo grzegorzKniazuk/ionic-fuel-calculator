@@ -1,16 +1,16 @@
 <app-no-data *ngIf="!refuelingHistoryData.length"></app-no-data>
-<div class="refueling-data">
+<div class="data-card-container">
     <app-refueling-history-data-entry *ngFor="let data of refuelingHistoryData | historySort: sortCriteria"
                                       [data]="data"
                                       (openModifyModal$)="openModifyEntryModal(data)"
                                       (openConfirmModal$)="openConfirmModal(data.mileage)"></app-refueling-history-data-entry>
 </div>
 <button (click)="openSortModal()"
-        class="sort-modal-button"
+        class="sort-button"
         color="accent" mat-mini-fab>
     <mat-icon>sort</mat-icon>
 </button>
-<button class="new-history-entry-button"
+<button class="new-entry-button"
         (click)="openNewEntryModal()"
         mat-mini-fab color="primary">
     <mat-icon>add</mat-icon>

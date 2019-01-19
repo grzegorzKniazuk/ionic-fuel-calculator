@@ -35,6 +35,6 @@
 
   .update-car-button {
     position: fixed;
-    @include position(auto, 10px, 10px, auto);
+    @include position(auto, 20px, 60px, auto);
   }
 }

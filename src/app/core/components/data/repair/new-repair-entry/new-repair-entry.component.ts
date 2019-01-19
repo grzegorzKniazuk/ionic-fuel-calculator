@@ -1,15 +1,8 @@
-import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
 
 @Component({
   selector: 'app-new-repair-entry',
   templateUrl: './new-repair-entry.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class NewRepairEntryComponent implements OnInit {
-
-  constructor() { }
-
-  ngOnInit() {
-  }
-
-}
+export class NewRepairEntryComponent {}

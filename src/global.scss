@@ -42,3 +42,20 @@ body {
     text-transform: uppercase;
   }
 }
+
+// data card
+.data-card-container {
+  @include flex(flex, center, center, row, static, wrap);
+}
+
+.new-entry-button {
+  position: fixed;
+  @include position(auto, 20px, 60px, auto);
+  z-index: 1001;
+}
+
+.sort-button {
+  position: fixed;
+  @include position(auto, 20px, 110px, auto);
+  z-index: 1001;
+}

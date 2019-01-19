@@ -45,6 +45,14 @@ export class FormService {
 		});
 	}
 
+	public get repairForm(): FormGroup {
+		return this.formBuilder.group({
+			date: ['', [ Validators.required ]],
+			description: ['', [ Validators.required ]],
+			price: ['', [ Validators.required, FloatNumberOnlyValidator ]],
+		});
+	}
+
 	public get sortForm(): FormGroup {
 		return this.formBuilder.group({
 			date: [ '' ],

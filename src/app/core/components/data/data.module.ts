@@ -46,6 +46,8 @@ const routes: Routes = [
 	entryComponents: [
 		NewEntryComponent,
 		EditEntryComponent,
+		NewRepairEntryComponent,
+		EditRepairEntryComponent,
 	],
 })
 export class DataPageModule {

@@ -18,9 +18,9 @@ import { RefuelingHistoryData } from '../../../../interfaces/refueling-history-d
 })
 export class FormEntryComponent implements OnInit, OnDestroy {
 
+	@Input() public entryData?: RefuelingHistoryData;
 	public today: Date;
 	public refuelingForm: FormGroup;
-	@Input() public entryData?: RefuelingHistoryData;
 
 	constructor(private matDialogRef: MatDialogRef<FormEntryComponent>,
 	            public storageService: StorageService,
@@ -53,7 +53,7 @@ export class FormEntryComponent implements OnInit, OnDestroy {
 		if (this.refuelingForm.valid && !this.entryData) {
 			this.storageService.saveNewRefuelingDataEntry(this.refuelingForm.value);
 		} else if (this.refuelingForm.valid && this.entryData && this.entryData.mileage) {
-			this.storageService.modifyDataEntry(this.entryData.mileage, this.refuelingForm.value);
+			this.storageService.modifyRefuelingDataEntry(this.entryData.mileage, this.refuelingForm.value);
 		}
 		this.matDialogRef.close(DialogComponentResponse.saved);
 	}

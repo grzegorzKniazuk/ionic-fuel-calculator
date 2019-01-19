@@ -1,0 +1,11 @@
+@import "./src/assets/styles/base.scss";
+
+form {
+  @include flex(flex, flex-start, center, column);
+  @include size(100%);
+  min-width: 95%;
+
+  mat-form-field {
+    width: 95%;
+  }
+}
