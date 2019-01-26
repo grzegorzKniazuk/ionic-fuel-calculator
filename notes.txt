@@ -1,0 +1,3 @@
+budowanie aplikacji
+cordova add platform android
+cordova emulate android
