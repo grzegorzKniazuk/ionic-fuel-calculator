@@ -1,3 +1,4 @@
 budowanie aplikacji
 cordova platform add android
 cordova emulate android
+cordova build android
