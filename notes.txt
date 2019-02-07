@@ -2,4 +2,5 @@ budowanie aplikacji
 cordova platform add android
 cordova emulate android
 cordova build android
+cordova build --release android
 ionic resources --icon
